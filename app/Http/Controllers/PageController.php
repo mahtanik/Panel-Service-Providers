@@ -108,4 +108,10 @@ class PageController extends Controller
     public function login(){
         return view('login');
     }
+
+//    public function serviceList(){
+//            $services = DB::table('service_details2')->lists('service_name');
+//            return view( servicesSummary , )
+//    }
+
 }

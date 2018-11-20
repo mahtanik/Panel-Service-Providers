@@ -35,9 +35,17 @@ Route::get('/', function() {
     ]);
 });
 
-Route::get('/read' , function (){
-    $results = DB::select( ' select * from tb_users where id = ?' , [1] );
-     return $results;
-});
+Route::get('/serviceSummary/{$services}', 'ServiceController@showServices' );
 
-//Router::resource( 'dashboard' , 'PageController' );
+
+
+//Route::get('/read' , function (){
+//    $services = DB::table('service_details2')->get();
+//
+////    foreach ($services as $service) {
+////        var_dump($service->service_name);
+////    }
+//
+//    return view( servicesSummary)->with('serviceRequest' , $services);
+//});
+

@@ -183,11 +183,13 @@
                                         <i data-brackets-id="2090" class="glyphicon glyphicon-calendar fa fa-calendar"></i>
                                         <span data-brackets-id="2091"></span> <b data-brackets-id="2092" class="caret"></b>
                                     </div>
-                                    انتخاب کنید : <select data-brackets-id="2093" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc">
-                                        <option data-brackets-id="2094" value="volvo">راهی نو</option>
-                                        <option data-brackets-id="2095" value="saab">بازینو</option>
-                                        <option data-brackets-id="2096" value="opel">بومرنگ</option>
-                                        <option data-brackets-id="2097" value="audi">توپخونه</option>
+                                    انتخاب کنید :
+                                            {{--@foreach( $services as $service)--}}
+                                            {{--<select style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc">--}}
+                                            {{--<option>{{ $service }}</option>--}}
+                                            {{--@endforeach--}}
+                                                <select>
+                                                    <option> {{$services}}</option>
                                     </select>
                                 </div>
                                 <div class="clearfix"></div>
