@@ -96,8 +96,8 @@
                             <li>
                                 <a style="font-style: italic"><i class="fa fa-bar-chart-o"></i>    نمودار <span class="fa fa-chevron-down"></span></a>
                                 <ul dir="rtl" class="nav child_menu">
-                                    <li><a href="servicesDiagram"> سرویس ها </a></li>
-                                    <li><a href="campaignesDiagram">کمپین ها</a></li>
+                                    <li><a href="servicesDiagrams"> سرویس ها </a></li>
+                                    <li><a href="campaignesDiagrams">کمپین ها</a></li>
                                 </ul>
                             </li>
                             <li>
@@ -184,12 +184,11 @@
                                         <span data-brackets-id="2091"></span> <b data-brackets-id="2092" class="caret"></b>
                                     </div>
 
-                                    انتخاب کنید : <select data-brackets-id="2093" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc">
-                                        <option data-brackets-id="2094" value="volvo">راهی نو</option>
-                                        <option data-brackets-id="2095" value="saab">بازینو</option>
-                                        <option data-brackets-id="2096" value="opel">بومرنگ</option>
-                                        <option data-brackets-id="2097" value="audi">توپخونه</option>
-                                    </select>
+                                    {{--<br>انتخاب کنید :<select>--}}
+                                        {{--@foreach( $campaignes as $campaign)--}}
+                                            {{--<option> {{ $service->service_name }} </option>--}}
+                                        {{--@endforeach--}}
+                                    {{--</select>--}}
                                 </div>
                                 <div class="clearfix"></div>
                             </div>

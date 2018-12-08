@@ -15,15 +15,15 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard' , 'PageController@dashboard');
+//Route::get('/dashboard' , 'PageController@dashboard');
 
 Route::get('/campaignes' , 'PageController@campaignes');
 
-Route::get('/servicesSummary' , 'PageController@tables_summary');
+//Route::get('/servicesSummary' , 'PageController@tables_summary');
 
 Route::get('/services' , 'PageController@tables_services');
 
-Route::get('/servicesDiagram' , 'PageController@Datarep_services');
+//Route::get('/servicesDiagram' , 'PageController@Datarep_services');
 
 Route::get('/campaignesDiagram' , 'PageController@Datarep_campaignes');
 
@@ -35,7 +35,17 @@ Route::get('/', function() {
     ]);
 });
 
-Route::get('/getServices', 'ServiceController@index' );
+Route::get('/servicesSummary' , 'ServiceController@service_summary' );
+
+Route::get('/services' , 'ServiceController@services' );
+
+//Route::get('/campaignes' , 'CampaignesController@campaignes' );
+
+Route::get('/servicesDiagrams' , 'serviceDiagramsController@Fill' );
+
+Route::get('/dashboard' , 'dashboardController@counter');
+
+
 
 
 

@@ -50,8 +50,8 @@
                                 <li>
                                     <a style="font-style: italic"><i class="fa fa-bar-chart-o"></i>    نمودار <span class="fa fa-chevron-down"></span></a>
                                     <ul dir="rtl" class="nav child_menu">
-                                        <li><a href="servicesDiagram"> سرویس ها </a></li>
-                                        <li><a href="campaignesDiagram">کمپین ها</a></li>
+                                        <li><a href="servicesDiagrams"> سرویس ها </a></li>
+                                        <li><a href="campaignesDiagrams">کمپین ها</a></li>
                                     </ul>
                                 </li>
                                 <li>
@@ -122,27 +122,27 @@
                     <div class="x_panel">
                         <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
                             <span class="count_top"><i class="fa fa-user"></i> تعداد کل کربران</span>
-                            <div class="count" lang="fa">۲۵۰۰</div>
+                            <div class="count" lang="fa">{{$total}}</div>
                             <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i> ٪۴   </i>   از هقته گذشته</span>
                         </div>
                         <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
                             <span class="count_top"><i class="fa fa-clock-o"></i> تعداد کل شارژها</span>
-                            <div class="count">۲۵۰۰</div>
+                            <div class="count">{{$totalcharge}}</div>
                             <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i> ۳ %</i> از هقته گذشته</span>
                         </div>
                         <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
                             <span class="count_top"><i class="fa fa-user"></i> تعداد کاربران جدید</span>
-                            <div class="count green">۲۵۰۰</div>
+                            <div class="count green">{{$subs}}</div>
                             <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i> ۳۴% </i> از هقته گذشته</span>
                         </div>
                         <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
                             <span class="count_top"><i class="fa fa-user"></i> تعداد کاربرانی که انصراف داده اند</span>
-                            <div class="count">۲۵۰۰</div>
+                            <div class="count">{{$unsubs}}</div>
                             <span class="count_bottom"><i class="red"><i class="fa fa-sort-desc"></i> ۱۲ </i> از هقته گذشته</span>
                         </div>
                         <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
                             <span class="count_top"><i class="fa fa-user"></i> تعداد شارژ خودکار</span>
-                            <div class="count">۲۵۰۰</div>
+                            <div class="count" lang="fa"> {{ $autocharges }} </div>
                             <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i> ۳ %</i> از هقته گذشته</span>
                         </div>
                     </div>

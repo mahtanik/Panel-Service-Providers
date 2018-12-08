@@ -63,8 +63,8 @@
                             <li>
                                 <a style="font-style: italic"><i class="fa fa-bar-chart-o"></i>    نمودار <span class="fa fa-chevron-down"></span></a>
                                 <ul dir="rtl" class="nav child_menu">
-                                    <li><a href="servicesDiagram"> سرویس ها </a></li>
-                                    <li><a href="campaignesDiagram">کمپین ها</a></li>
+                                    <li><a href="servicesDiagrams"> سرویس ها </a></li>
+                                    <li><a href="campaignesDiagrams">کمپین ها</a></li>
                                 </ul>
                             </li>
                             <li>
