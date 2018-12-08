@@ -4113,6 +4113,7 @@ if (typeof NProgress != 'undefined') {
 				  x: 'center',
 				  y: 'bottom',
 				  data: ['شمعدونی', 'راهی نو', 'ذهن آزما', 'توپخونه', 'بومرنگ']
+
 				},
 				toolbox: {
 				  show: true,

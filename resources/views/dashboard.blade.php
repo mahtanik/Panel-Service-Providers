@@ -135,8 +135,8 @@
                             <div class="count green">{{$subs}}</div>
                             <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i> ۳۴% </i> از هقته گذشته</span>
                         </div>
-                        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-                            <span class="count_top"><i class="fa fa-user"></i> تعداد کاربرانی که انصراف داده اند</span>
+                        <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count" style="width: 30%">
+                            <span class="count_top" ><i class="fa fa-user"></i> تعداد کاربرانی که انصراف داده اند</span>
                             <div class="count">{{$unsubs}}</div>
                             <span class="count_bottom"><i class="red"><i class="fa fa-sort-desc"></i> ۱۲ </i> از هقته گذشته</span>
                         </div>

@@ -12,10 +12,23 @@ class dashboardController extends Controller
         $autocharges1 = DB::table('transactions_1513991762415000038187743')->where('action' , 'AUTO_CHARGE')->count();
         $autocharges2 = DB::table('transactions_1513991762415000000015575')->where('action' , 'AUTO_CHARGE')->count();
         $autocharges = $autocharges1 + $autocharges2;
-        $unsubs = DB::table('transactions_1513991762415000038187743')->where('action' , 'UNSUBSCRIPTION')->count();
+
+        $unsubs1 = DB::table('transactions_1513991762415000038187743')->where('action' , 'UNSUBSCRIPTION')->count();
+        $unsubs2 = DB::table('transactions_1513991762415000000015575')->where('action' , 'UNSUBSCRIPTION')->count();
+        $unsubs = $unsubs1 + $unsubs2;
         $subs = DB::table('transactions_1513991762415000038187743')->where('action' , 'SUBSCRIPTION')->count();
-        $total = DB::table('transactions_1513991762415000038187743')->count();
-        $totalcharge = DB::table('transactions_1513991762415000038187743')->where( 'action' , 'AUTO_CHARGE')->orwhere( 'action' , 'SUBSCRIPTION')->count();
+
+        $total1 = DB::table('transactions_1513991762415000038187743')->count();
+        $total2 = DB::table('transactions_1513991762415000000015575')->count();
+        $total = $total1 + $total2;
+
+        $totalcharge1 = DB::table('transactions_1513991762415000038187743')->where( 'action' , 'AUTO_CHARGE')->orwhere( 'action' , 'SUBSCRIPTION')->count();
+        $totalcharge2 = DB::table('transactions_1513991762415000000015575')->where( 'action' , 'AUTO_CHARGE')->orwhere( 'action' , 'SUBSCRIPTION')->count();
+        $totalcharge = $total + $total2;
+
+        $piechart1 = DB::table( 'transactions_1513991762415000038187743')->count();
+        $piechart2 = DB::table( 'transactions_1513991762415000000015575')->count();
+
         return view('dashboard' , [ 'autocharges' => $autocharges , 'unsubs' => $unsubs , 'subs'=>$subs , 'total'=> $total , 'totalcharge'=>$totalcharge]);
     }
 }
