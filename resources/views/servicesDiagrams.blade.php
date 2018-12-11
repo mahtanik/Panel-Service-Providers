@@ -18,6 +18,15 @@
     <link href="/HUB/public/css/daterangepicker.css" rel="stylesheet">
     <!-- Custom Theme Style -->
     <link href="/HUB/public/css/custom.min.css" rel="stylesheet">
+    <style>
+        .isDisabled {
+            color: currentColor;
+            cursor: not-allowed;
+            opacity: 0.5;
+            text-decoration: none;
+            pointer-events: none;
+        }
+    </style>
 </head>
 <body data-brackets-id="1982" class="nav-sm" style="padding-right: 0px;">
 <div data-brackets-id="1983" class="container body">
@@ -49,7 +58,7 @@
                                 <a style="font-style: italic"><i class="fa fa-bar-chart-o"></i>    نمودار <span class="fa fa-chevron-down"></span></a>
                                 <ul dir="rtl" class="nav child_menu">
                                     <li><a href="servicesDiagrams"> سرویس ها </a></li>
-                                    <li><a href="campaignesDiagrams">کمپین ها</a></li>
+                                    <li><a class="isDisabled" href="campaignesDiagrams">کمپین ها</a></li>
                                 </ul>
                             </li>
                             <li>
@@ -60,7 +69,7 @@
                                 </ul>
                             </li>
                             <li>
-                                <a href="campaignes" style="font-style: italic"; ><i class="fa fa-tags"></i>کمپین ها  </a>
+                                <a class="isDisabled" href="campaignes" style="font-style: italic"; ><i class="fa fa-tags"></i>کمپین ها  </a>
                             </li>
                         </ul>
                     </div>

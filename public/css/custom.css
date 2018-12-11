@@ -3124,6 +3124,13 @@ ul.project_files li a i {
 .caption p {
     margin-bottom: 5px
 }
+.isDisabled {
+    color: currentColor;
+    cursor: not-allowed;
+    opacity: 0.5;
+    text-decoration: none;
+}
+
 .thumbnail {
     height: 190px;
     overflow: hidden

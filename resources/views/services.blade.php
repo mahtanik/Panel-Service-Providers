@@ -18,6 +18,15 @@
     <link href="/HUB/public/css/daterangepicker.css" rel="stylesheet">
     <!-- Custom Theme Style -->
     <link href="/HUB/public/css/custom.min.css" rel="stylesheet">
+    <style>
+        .isDisabled {
+            color: currentColor;
+            cursor: not-allowed;
+            opacity: 0.5;
+            text-decoration: none;
+            pointer-events: none;
+        }
+    </style>
 </head>
 <body class="nav-md">
 <!-- Modal -->
@@ -43,30 +52,16 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>John</td>
-                        <td>Doe</td>
-                        <td>Doe</td>
-                        <td>Doe</td>
-                        <td>Doe</td>
-                        <td>john@example.com</td>
-                    </tr>
-                    <tr>
-                        <td>John</td>
-                        <td>Doe</td>
-                        <td>Doe</td>
-                        <td>Doe</td>
-                        <td>Doe</td>
-                        <td>john@example.com</td>
-                    </tr>
-                    <tr>
-                        <td>John</td>
-                        <td>Doe</td>
-                        <td>Doe</td>
-                        <td>Doe</td>
-                        <td>Doe</td>
-                        <td>john@example.com</td>
-                    </tr>
+                        <tr>
+                            {{--@foreach( $users as $user)--}}
+                                {{--<td> {{ $user}} </td>--}}
+                                {{--<td> {{}}</td>--}}
+                                {{--<td></td>--}}
+                                {{--<td></td>--}}
+                                {{--<td></td>--}}
+                                {{--<td></td>--}}
+                            {{--@endforeach--}}
+                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -109,7 +104,7 @@
                                 <a style="font-style: italic"><i class="fa fa-bar-chart-o"></i>    نمودار <span class="fa fa-chevron-down"></span></a>
                                 <ul dir="rtl" class="nav child_menu">
                                     <li><a href="servicesDiagrams"> سرویس ها </a></li>
-                                    <li><a href="campaignesDiagrams">کمپین ها</a></li>
+                                    <li><a class="isDisabled"href="campaignesDiagrams">کمپین ها</a></li>
                                 </ul>
                             </li>
                             <li>
@@ -120,7 +115,7 @@
                                 </ul>
                             </li>
                             <li>
-                                <a href="campaignes" style="font-style: italic"; ><i class="fa fa-tags"></i>کمپین ها  </a>
+                                <a class="isDisabled" href="campaignes" style="font-style: italic"; ><i class="fa fa-tags"></i>کمپین ها  </a>
                             </li>
                         </ul>
                     </div>
@@ -216,49 +211,54 @@
                                         <th>کل فعال مانده</th>
                                         <th>کل غیرفعالسازی ها</th>
                                         <th>کل فعالسازی ها</th>
+                                        <th>اطلاعات و جزییات</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     <tr>
-                                        <td>100<a data-toggle="modal" href="#myModal"><i class="fa fa-external-link"></i></a></td>
-                                        <td>200<a data-toggle="modal" href="#myModal"><i class="fa fa-external-link"></i></a></td>
-                                        <td>300<a data-toggle="modal" href="#myModal"><i class="fa fa-external-link"></i></a></td>
-                                        <td>61<a data-toggle="modal" href="#myModal"><i class="fa fa-external-link"></i></a></td>
+                                        <td>100 </td>
+                                        <td>200 </td>
+                                        <td>300 </td>
+                                        <td>61 </td>
                                         <td>2011/04/25</td>
-                                        <td>43<a data-toggle="modal" href="#myModal"><i class="fa fa-external-link"></i></a></td>
-                                        <td>21<a data-toggle="modal" href="#myModal"><i class="fa fa-external-link"></i></a></td>
-                                        <td>80<a data-toggle="modal" href="#myModal"><i class="fa fa-external-link"></i></a></td>
+                                        <td>43 </td>
+                                        <td>21 </td>
+                                        <td>80 </td>
+                                        <td><a data-toggle="modal" href="#myModal"><i class="fa fa-external-link"></i></a></td>
                                     </tr>
 
                                     <tr>
-                                        <td>100<a data-toggle="modal" href="#myModal"><i class="fa fa-external-link"></i></a></td>
-                                        <td>200<a data-toggle="modal" href="#myModal"><i class="fa fa-external-link"></i></a></td>
-                                        <td>300<a data-toggle="modal" href="#myModal"><i class="fa fa-external-link"></i></a></td>
-                                        <td>61<a data-toggle="modal" href="#myModal"><i class="fa fa-external-link"></i></a></td>
+                                        <td>100 </td>
+                                        <td>200 </td>
+                                        <td>300 </td>
+                                        <td>61 </td>
                                         <td>2011/04/25</td>
-                                        <td>43<a data-toggle="modal" href="#myModal"><i class="fa fa-external-link"></i></a></td>
-                                        <td>21<a data-toggle="modal" href="#myModal"><i class="fa fa-external-link"></i></a></td>
-                                        <td>80<a data-toggle="modal" href="#myModal"><i class="fa fa-external-link"></i></a></td>
+                                        <td>43 </td>
+                                        <td>21 </td>
+                                        <td>80 </td>
+                                        <td><a data-toggle="modal" href="#myModal"><i class="fa fa-external-link"></i></a></td>
                                     </tr>
                                     <tr>
-                                        <td>100<a data-toggle="modal" href="#myModal"><i class="fa fa-external-link"></i></a></td>
-                                        <td>200<a data-toggle="modal" href="#myModal"><i class="fa fa-external-link"></i></a></td>
-                                        <td>300<a data-toggle="modal" href="#myModal"><i class="fa fa-external-link"></i></a></td>
-                                        <td>61<a data-toggle="modal" href="#myModal"><i class="fa fa-external-link"></i></a></td>
+                                        <td>100 </td>
+                                        <td>200 </td>
+                                        <td>300 </td>
+                                        <td>61 </td>
                                         <td>2011/04/25</td>
-                                        <td>43<a data-toggle="modal" href="#myModal"><i class="fa fa-external-link"></i></a></td>
-                                        <td>21<a data-toggle="modal" href="#myModal"><i class="fa fa-external-link"></i></a></td>
-                                        <td>80<a data-toggle="modal" href="#myModal"><i class="fa fa-external-link"></i></a></td>
+                                        <td>43 </td>
+                                        <td>21 </td>
+                                        <td>80 </td>
+                                        <td><a data-toggle="modal" href="#myModal"><i class="fa fa-external-link"></i></a></td>
                                     </tr>
                                     <tr>
-                                        <td>100<a data-toggle="modal" href="#myModal"><i class="fa fa-external-link"></i></a></td>
-                                        <td>200<a data-toggle="modal" href="#myModal"><i class="fa fa-external-link"></i></a></td>
-                                        <td>300<a data-toggle="modal" href="#myModal"><i class="fa fa-external-link"></i></a></td>
-                                        <td>61<a data-toggle="modal" href="#myModal"><i class="fa fa-external-link"></i></a></td>
+                                        <td>100 </td>
+                                        <td>200 </td>
+                                        <td>300 </td>
+                                        <td>61 </td>
                                         <td>2011/04/25</td>
-                                        <td>43<a data-toggle="modal" href="#myModal"><i class="fa fa-external-link"></i></a></td>
-                                        <td>21<a data-toggle="modal" href="#myModal"><i class="fa fa-external-link"></i></a></td>
-                                        <td>80<a data-toggle="modal" href="#myModal"><i class="fa fa-external-link"></i></a></td>
+                                        <td>43 </td>
+                                        <td>21 </td>
+                                        <td>80 </td>
+                                        <td><a data-toggle="modal" href="#myModal"><i class="fa fa-external-link"></i></a></td>
                                     </tr>
                                     </tbody>
                                 </table>

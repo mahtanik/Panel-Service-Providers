@@ -25,7 +25,7 @@ Route::get('/services' , 'PageController@tables_services');
 
 //Route::get('/servicesDiagram' , 'PageController@Datarep_services');
 
-Route::get('/campaignesDiagram' , 'PageController@Datarep_campaignes');
+Route::get('/campaignesDiagrams' , 'PageController@Datarep_campaignes');
 
 Route::get('/login' , 'PageController@login');
 
