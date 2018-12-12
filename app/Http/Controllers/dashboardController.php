@@ -9,6 +9,7 @@ class dashboardController extends Controller
 {
     public function counter()
     {
+        //Summary of the data and changes in all services
         $autocharges1 = DB::table('transactions_1513991762415000038187743')->where('action' , 'AUTO_CHARGE')->count();
         $autocharges2 = DB::table('transactions_1513991762415000000015575')->where('action' , 'AUTO_CHARGE')->count();
         $autocharges = $autocharges1 + $autocharges2;
@@ -26,6 +27,7 @@ class dashboardController extends Controller
         $totalcharge2 = DB::table('transactions_1513991762415000000015575')->where( 'action' , 'AUTO_CHARGE')->orwhere( 'action' , 'SUBSCRIPTION')->count();
         $totalcharge = $total + $total2;
 
+        // calcularing the top four services to dispaly in donut-chart
         $topfour = DB::table( 'transactions_1513991762415000000015575')->select('id')->groupBy('id')->offset(0)->limit(10)->get();
 
         return view('dashboard' , [ 'autocharges' => $autocharges , 'unsubs' => $unsubs , 'subs'=>$subs , 'total'=> $total , 'totalcharge'=>$totalcharge , 'topfour'=> $topfour]);

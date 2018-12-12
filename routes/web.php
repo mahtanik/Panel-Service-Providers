@@ -17,15 +17,17 @@ Route::get('/', function () {
 
 //Route::get('/dashboard' , 'PageController@dashboard');
 
-Route::get('/campaignes' , 'PageController@campaignes');
+//coming soon
+//Route::get('/campaignes' , 'PageController@campaignes');
 
 //Route::get('/servicesSummary' , 'PageController@tables_summary');
 
-Route::get('/services' , 'PageController@tables_services');
+//Route::get('/services' , 'PageController@tables_services');
 
 //Route::get('/servicesDiagram' , 'PageController@Datarep_services');
 
-Route::get('/campaignesDiagrams' , 'PageController@Datarep_campaignes');
+//coming soon
+//Route::get('/campaignesDiagrams' , 'PageController@Datarep_campaignes');
 
 Route::get('/login' , 'PageController@login');
 
@@ -44,18 +46,4 @@ Route::get('/services' , 'ServiceController@services' );
 Route::get('/servicesDiagrams' , 'serviceDiagramsController@Fill' );
 
 Route::get('/dashboard' , 'dashboardController@counter');
-
-
-
-
-
-//Route::get('/read' , function (){
-//    $services = DB::table('service_details2')->get();
-//
-////    foreach ($services as $service) {
-////        var_dump($service->service_name);
-////    }
-//
-//    return view( servicesSummary)->with('serviceRequest' , $services);
-//});
 

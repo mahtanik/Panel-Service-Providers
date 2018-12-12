@@ -172,21 +172,6 @@
                     <div class="col-md-12 col-sm-12 col-xs-12">
                         <div class="x_panel">
                             <div class="x_title">
-                                <ul class="nav navbar-right panel_toolbox">
-                                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                                    </li>
-                                    <li class="dropdown">
-                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                                        <ul class="dropdown-menu" role="menu">
-                                            <li><a href="#">Settings 1</a>
-                                            </li>
-                                            <li><a href="#">Settings 2</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li><a class="close-link"><i class="fa fa-close"></i></a>
-                                    </li>
-                                </ul>
                                 <div data-brackets-id="2088" class="col-md-6" style="float: right">
                                     <div data-brackets-id="2089" id="reportrange" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc">
                                         <i data-brackets-id="2090" class="glyphicon glyphicon-calendar fa fa-calendar"></i>
@@ -194,7 +179,7 @@
                                     </div>
                                     <br/>
                                     <br>
-                                    انتخاب کنید :<select>
+                                    انتخاب کنید :<select id="ajaxSubmit">
                                         @foreach( $services as $service)
                                         <option> {{ $service->service_name }} </option>
                                         @endforeach
@@ -293,5 +278,8 @@
 <script src="/HUB/public/js/jszip.min.js"></script>
 <script src="/HUB/public/js/pdfmake.min.js"></script>
 <script src="/HUB/public/js/vfs_fonts.js"></script>
+<meta name="_token" content="{!! csrf_token() !!}" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="{{asset('js/ajax-crud.js')}}"></script>
 </body>
 </html>

@@ -18,6 +18,7 @@
     <link href="/HUB/public/css/daterangepicker.css" rel="stylesheet">
     <!-- Custom Theme Style -->
     <link href="/HUB/public/css/custom.min.css" rel="stylesheet">
+
     <style>
         .isDisabled {
             color: currentColor;
@@ -54,12 +55,12 @@
                     <tbody>
                         <tr>
                             {{--@foreach( $users as $user)--}}
-                                {{--<td> {{ $user}} </td>--}}
-                                {{--<td> {{}}</td>--}}
-                                {{--<td></td>--}}
-                                {{--<td></td>--}}
-                                {{--<td></td>--}}
-                                {{--<td></td>--}}
+                                <td> </td>
+                                <td> </td>
+                                <td> </td>
+                                <td> </td>
+                                <td> </td>
+                                <td> </td>
                             {{--@endforeach--}}
                         </tr>
                     </tbody>
@@ -170,21 +171,6 @@
                     <div class="col-md-12 col-sm-12 col-xs-12">
                         <div class="x_panel">
                             <div class="x_title">
-                                <ul class="nav navbar-right panel_toolbox">
-                                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                                    </li>
-                                    <li class="dropdown">
-                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                                        <ul class="dropdown-menu" role="menu">
-                                            <li><a href="#">Settings 1</a>
-                                            </li>
-                                            <li><a href="#">Settings 2</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li><a class="close-link"><i class="fa fa-close"></i></a>
-                                    </li>
-                                </ul>
                                 <div data-brackets-id="2088" class="col-md-6" style="float: right">
                                     <div data-brackets-id="2089" id="reportrange" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc">
                                         <i data-brackets-id="2090" class="glyphicon glyphicon-calendar fa fa-calendar"></i>
@@ -326,5 +312,6 @@
 <script src="/HUB/public/js/jszip.min.js"></script>
 <script src="/HUB/public/js/pdfmake.min.js"></script>
 <script src="/HUB/public/js/vfs_fonts.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 </body>
 </html>

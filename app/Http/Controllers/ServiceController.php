@@ -14,6 +14,17 @@ class ServiceController extends Controller
         return view('servicesSummary', ['services'=>$services]);
     }
 
+    public function store(Request $request)
+    {
+        $grocery = new Grocery();
+        $grocery->name = $request->name;
+        $grocery->type = $request->type;
+        $grocery->price = $request->price;
+
+        $grocery->save();
+        return response()->json(['success'=>'Data is successfully added']);
+    }
+    
     public function services()
     {
         $services = DB::select('select service_name from service_details2');
@@ -23,16 +34,16 @@ class ServiceController extends Controller
 
 
 
-    public function counter()
-    {
-        $autocharges = DB::table('transactions_1513991762415000038187743')->where('action' , 'AUTO_CHARGE')->count();
-    //$a = DB::table('transactions_1513991762415000038187743')->join('transactions_1513991762415000000015575' , 'transactions_1513991762415000038187743'.action , '=' , 'ransactions_1513991762415000000015575.action' )
-$unsubs = DB::table('transactions_1513991762415000038187743')->where('action' , 'UNSUBSCRIPTION')->count();
-$subs = DB::table('transactions_1513991762415000038187743')->where('action' , 'SUBSCRIPTION')->count();
-$total = DB::table('transactions_1513991762415000038187743')->count();
-$totalcharge = DB::table('transactions_1513991762415000038187743')->where( 'action' , 'AUTO_CHARGE')->orwhere( 'action' , 'SUBSCRIPTION')->count();
-return view('dashboard' , [ 'autocharges' => $autocharges , 'unsubs' => $unsubs , 'subs'=>$subs , 'total'=> $total , 'totalcharge'=>$totalcharge]);
-}
+//    public function counter()
+//    {
+//        $autocharges = DB::table('transactions_1513991762415000038187743')->where('action' , 'AUTO_CHARGE')->count();
+//        //$a = DB::table('transactions_1513991762415000038187743')->join('transactions_1513991762415000000015575' , 'transactions_1513991762415000038187743'.action , '=' , 'ransactions_1513991762415000000015575.action' )
+//        $unsubs = DB::table('transactions_1513991762415000038187743')->where('action' , 'UNSUBSCRIPTION')->count();
+//        $subs = DB::table('transactions_1513991762415000038187743')->where('action' , 'SUBSCRIPTION')->count();
+//        $total = DB::table('transactions_1513991762415000038187743')->count();
+//        $totalcharge = DB::table('transactions_1513991762415000038187743')->where( 'action' , 'AUTO_CHARGE')->orwhere( 'action' , 'SUBSCRIPTION')->count();
+//        return view('dashboard' , [ 'autocharges' => $autocharges , 'unsubs' => $unsubs , 'subs'=>$subs , 'total'=> $total , 'totalcharge'=>$totalcharge]);
+//}
 
     public function giveDetails(){
 
@@ -44,4 +55,6 @@ return view('dashboard' , [ 'autocharges' => $autocharges , 'unsubs' => $unsubs 
 
         return view('services' , [ 'user'=>$user , 'mobilenum' => $mobilenum , 'certificate'=> $certificate , 'CreatedOn'=>$CreatedOn , 'status'=>$status]);
     }
+
+
 }

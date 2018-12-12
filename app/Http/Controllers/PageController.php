@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 class PageController extends Controller
 {
+
+    //the Controller which gets the url and returns the requested page
     /**
      * Display a listing of the resource.
      *
