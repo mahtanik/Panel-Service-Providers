@@ -2627,10 +2627,10 @@ if (typeof NProgress != 'undefined') {
 				Morris.Bar({
 				  element: 'graphx',
 				  data: [
-					{x: '2015 Q1', y: 2, z: 3, a: 4 ,b: 6},
-					{x: '2015 Q2', y: 3, z: 5, a: 6 , b:10},
-					{x: '2015 Q3', y: 4, z: 3, a: 2  ,b: 2},
-					{x: '2015 Q4', y: 2, z: 4, a: 5 , b: 1}
+					{x: '2015', y: 2, z: 3, a: 4 ,b: 6},
+					{x: '2015', y: 3, z: 5, a: 6 , b:10},
+					{x: '2015', y: 4, z: 3, a: 2  ,b: 2},
+					{x: '2015', y: 2, z: 4, a: 5 , b: 1}
 				  ],
 				  xkey: 'x',
 				  ykeys: ['y', 'z', 'a' ,'b'],
@@ -4112,7 +4112,7 @@ if (typeof NProgress != 'undefined') {
 				legend: {
 				  x: 'center',
 				  y: 'bottom',
-				  data: ['شمعدونی', 'راهی نو', 'ذهن آزما', 'توپخونه', 'بومرنگ']
+				  data: [ 'راهی نو', 'ذهن آزما', 'توپخونه', 'بومرنگ']
 
 				},
 				toolbox: {
@@ -4141,7 +4141,7 @@ if (typeof NProgress != 'undefined') {
 				  }
 				},
 				series: [{
-				  name: 'شمعدونی',
+				  name: 'فعالسازیها',
 				  type: 'pie',
 				  radius: ['35%', '55%'],
 				  itemStyle: {
@@ -4199,7 +4199,7 @@ if (typeof NProgress != 'undefined') {
 				legend: {
 				  x: 'center',
 				  y: 'bottom',
-				  data: ['شمعدونی', 'راهی نو', 'ذهن آزما', 'توپخونه', 'بومرنگ' , 'بازینو']
+				  data: [ 'راهی نو', 'ذهن آزما', 'توپخونه', 'بومرنگ' , 'بازینو']
 				},
 				toolbox: {
 				  show: true,
@@ -4228,7 +4228,7 @@ if (typeof NProgress != 'undefined') {
 				},
 				calculable: true,
 				series: [{
-				  name: 'شمعدونی',
+				  name: 'تعداد مشترکین',
 				  type: 'pie',
 				  radius: '55%',
 				  center: ['50%', '48%'],

@@ -179,13 +179,17 @@
                                     </div>
                                     <br/>
                                     <br>
-                                    انتخاب کنید :<select id="ajaxSubmit">
-                                        @foreach( $services as $service)
-                                        <option> {{ $service->service_name }} </option>
-                                        @endforeach
-                                    </select>
+                                    <form>انتخاب کنید :
+                                        <select name="selectService">
+                                            @foreach( $services as $service)
+                                                <option> {{ $service->service_name }} </option>
+                                            @endforeach
+                                        </select>
+                                        <input type='submit' name='submit' placeholder='اعمال'>
+                                    </form>
                                 </div>
                                 <div class="clearfix"></div>
+                                <i class="fa-circle"></i><strong style="color: #985f0d">سرویس {{$selectedService}}</strong>
                             </div>
                             <div class="x_content">
                                 <table id="datatable-buttons" class="table table-striped table-bordered">
@@ -194,25 +198,33 @@
                                         <th>تاریخ</th>
                                         <th>درآمد موفق</th>
                                         <th>تعداد شارژ</th>
-                                        <th>تعداد فعالسازی روز</th>
-                                        <th>تعداد غیرفعالسازی روز</th>
+                                        <th>تعداد فعالسازی </th>
                                         <th>تعداد غیرفعال سازی</th>
-                                        <th>جزییات</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    /////////////editing
-                                    {{--@foreach( $details as $detail)--}}
-                                    {{--<tr>--}}
-                                        {{--<td> {{$detail-> CreatedOn}}<a data-toggle="modal" href="#myModal"><i class="fa fa-external-link"></i></a></td>--}}
-                                        {{--<td>200<a data-toggle="modal" href="#myModal"><i class="fa fa-external-link"></i></a></td>--}}
-                                        {{--<td>300<a data-toggle="modal" href="#myModal"><i class="fa fa-external-link"></i></a></td>--}}
-                                        {{--<td>61<a data-toggle="modal" href="#myModal"><i class="fa fa-external-link"></i></a></td>--}}
-                                        {{--<td>2011/04/25</td>--}}
-                                        {{--<td>43<a data-toggle="modal" href="#myModal"><i class="fa fa-external-link"></i></a></td>--}}
-                                        {{--<td>21<a data-toggle="modal" href="#myModal"><i class="fa fa-external-link"></i></a></td>--}}
-                                    {{--</tr>--}}
-                                    {{--</tbody>--}}
+                                    @foreach( $date as $day)
+                                        <tr>
+                                            <td>{{$day}}</td>
+                                            <td> - </td>
+                                            <td> {{$autocharges}} </td>
+                                            <td> {{$subs}} </td>
+                                            <td> {{$unsubs}} </td>
+                                        </tr>
+                                    @endforeach
+                                    @foreach( $date as $day)
+                                        <?php for ($i=0;$i<=10;$i++) { ?>
+
+                                        <tr>
+                                            <td>{{$day}}</td>
+                                            <td> - </td>
+                                            <td> {{$autocharges}} </td>
+                                            <td> {{$subs[$i]}} </td>
+                                            <td>{{$unsubs}}</td>
+                                        </tr>
+                                        <?php } ?>
+                                    @endforeach
+                                    </tbody>
                                 </table>
                             </div>
                         </div>
@@ -278,8 +290,8 @@
 <script src="/HUB/public/js/jszip.min.js"></script>
 <script src="/HUB/public/js/pdfmake.min.js"></script>
 <script src="/HUB/public/js/vfs_fonts.js"></script>
-<meta name="_token" content="{!! csrf_token() !!}" />
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script src="{{asset('js/ajax-crud.js')}}"></script>
+{{--<meta name="_token" content="{!! csrf_token() !!}" />--}}
+{{--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>--}}
+{{--<script src="{{asset('js/ajax-crud.js')}}"></script>--}}
 </body>
 </html>

@@ -12,36 +12,20 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('login' , 'PageController@login');
 });
-
-//Route::get('/dashboard' , 'PageController@dashboard');
 
 //coming soon
 //Route::get('/campaignes' , 'PageController@campaignes');
-
-//Route::get('/servicesSummary' , 'PageController@tables_summary');
-
-//Route::get('/services' , 'PageController@tables_services');
-
-//Route::get('/servicesDiagram' , 'PageController@Datarep_services');
 
 //coming soon
 //Route::get('/campaignesDiagrams' , 'PageController@Datarep_campaignes');
 
 Route::get('/login' , 'PageController@login');
 
-Route::get('/', function() {
-    return response()->json([
-        'stuff' => phpinfo()
-    ]);
-});
-
 Route::get('/servicesSummary' , 'ServiceController@service_summary' );
 
 Route::get('/services' , 'ServiceController@services' );
-
-//Route::get('/campaignes' , 'CampaignesController@campaignes' );
 
 Route::get('/servicesDiagrams' , 'serviceDiagramsController@Fill' );
 

@@ -18,6 +18,7 @@
     <link href="/HUB/public/css/daterangepicker.css" rel="stylesheet">
     <!-- Custom Theme Style -->
     <link href="/HUB/public/css/custom.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 
     <style>
         .isDisabled {
@@ -31,7 +32,7 @@
 </head>
 <body class="nav-md">
 <!-- Modal -->
-<div class="modal fade" id="myModal" role="dialog" dir="ltr">
+<div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog">
 
         <!-- Modal content-->
@@ -46,25 +47,24 @@
                     <tr>
                         <th> شماره موبایل</th>
                         <th>نحوه فعالسازی</th>
-                        <th>آخرین فعالسازی</th>
-                        <th>آخرین غیرفعالسازی</th>
-                        <th>نحوه غیرفعالسازی</th>
+                        <th>تعداد شارژ</th>
                         <th>وضعیت</th>
                     </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            {{--@foreach( $users as $user)--}}
-                                <td> </td>
-                                <td> </td>
-                                <td> </td>
-                                <td> </td>
-                                <td> </td>
-                                <td> </td>
-                            {{--@endforeach--}}
-                        </tr>
+                            @foreach( $users as $user)
+                                    <?php for ($j=0;$j<=10;$j++) { ?>
+                                    <tr>
+                                        <td> {{$user_number[$j]}}</td>
+                                        <td> {{$user_certificate[$j]}}</td>
+                                        <td> {{$user_charges[$j]}}</td>
+                                        <td> {{$user_status[$j]}}</td>
+                                    </tr>
+                                    <?php } ?>
+                            @endforeach
                     </tbody>
                 </table>
+                {{ csrf_field() }}
             </div>
         </div>
     </div>
@@ -177,23 +177,28 @@
                                         <span data-brackets-id="2091"></span> <b data-brackets-id="2092" class="caret"></b>
                                     </div>
                                     <br>
-                                    <br>انتخاب کنید :<select>
-                                        @foreach( $services as $service)
-                                            <option> {{ $service->service_name }} </option>
-                                        @endforeach
-                                    </select>
+                                    <br>
+                                    <form>انتخاب کنید :
+                                        <select name="selectService">
+                                            @foreach( $services as $service)
+                                                <option> {{ $service->service_name }} </option>
+                                            @endforeach
+                                        </select>
+                                        <input type='submit' name='submit' placeholder='اعمال'>
+                                    </form>
                                 </div>
                                 <div class="clearfix"></div>
+                                <i class="fa-circle"></i><strong style="color: #985f0d">سرویس {{$selectedService}}</strong>
                             </div>
                             <div class="x_content">
                                 <table id="datatable-buttons" class="table table-striped table-bordered">
                                     <thead>
                                     <tr>
-                                        <th>غیرفعال دائمی</th>
-                                        <th>فعال دائمی</th>
-                                        <th>غیرفعال اعتباری</th>
-                                        <th>فعال اعتباری</th>
                                         <th>تاریخ</th>
+                                        {{--<th hidden>غیرفعال دائمی</th>--}}
+                                        {{--<th hidden>فعال دائمی</th>--}}
+                                        {{--<th hidden>غیرفعال اعتباری</th>--}}
+                                        {{--<th hidden>فعال اعتباری</th>--}}
                                         <th>کل فعال مانده</th>
                                         <th>کل غیرفعالسازی ها</th>
                                         <th>کل فعالسازی ها</th>
@@ -201,51 +206,22 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
-                                        <td>100 </td>
-                                        <td>200 </td>
-                                        <td>300 </td>
-                                        <td>61 </td>
-                                        <td>2011/04/25</td>
-                                        <td>43 </td>
-                                        <td>21 </td>
-                                        <td>80 </td>
-                                        <td><a data-toggle="modal" href="#myModal"><i class="fa fa-external-link"></i></a></td>
-                                    </tr>
+                                    @foreach( $date as $day)
+                                        <?php for ($i=0;$i<=10;$i++) { ?>
 
-                                    <tr>
-                                        <td>100 </td>
-                                        <td>200 </td>
-                                        <td>300 </td>
-                                        <td>61 </td>
-                                        <td>2011/04/25</td>
-                                        <td>43 </td>
-                                        <td>21 </td>
-                                        <td>80 </td>
-                                        <td><a data-toggle="modal" href="#myModal"><i class="fa fa-external-link"></i></a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>100 </td>
-                                        <td>200 </td>
-                                        <td>300 </td>
-                                        <td>61 </td>
-                                        <td>2011/04/25</td>
-                                        <td>43 </td>
-                                        <td>21 </td>
-                                        <td>80 </td>
-                                        <td><a data-toggle="modal" href="#myModal"><i class="fa fa-external-link"></i></a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>100 </td>
-                                        <td>200 </td>
-                                        <td>300 </td>
-                                        <td>61 </td>
-                                        <td>2011/04/25</td>
-                                        <td>43 </td>
-                                        <td>21 </td>
-                                        <td>80 </td>
-                                        <td><a data-toggle="modal" href="#myModal"><i class="fa fa-external-link"></i></a></td>
-                                    </tr>
+                                        <tr>
+                                            <td>{{$day}}</td>
+                                            {{--<td> - </td>--}}
+                                            {{--<td> - </td>--}}
+                                            {{--<td> - </td>--}}
+                                            {{--<td> - </td>--}}
+                                            <td> {{$subs[$i] + $autocharges[$i]}} </td>
+                                            <td> {{$unsubs[$i]}} </td>
+                                            <td> {{$subs[$i]}} </td>
+                                            <td><a data-toggle="modal" href="#myModal"><i class="fa fa-external-link"></i></a></td>
+                                        </tr>
+                                        <?php } ?>
+                                    @endforeach
                                     </tbody>
                                 </table>
                             </div>
@@ -312,6 +288,34 @@
 <script src="/HUB/public/js/jszip.min.js"></script>
 <script src="/HUB/public/js/pdfmake.min.js"></script>
 <script src="/HUB/public/js/vfs_fonts.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+
+{{--<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>--}}
+{{--<script>--}}
+    {{--$(document).ready(function () {--}}
+                {{--fetch_data();--}}
+
+                {{--function fetch_data() {--}}
+                    {{--$.ajax({--}}
+                        {{--url : "/services/" ,--}}
+                        {{--data_type : "json" ,--}}
+                        {{--success : function (data) {--}}
+                            {{--var html = '';--}}
+                            {{--html += '<tr>';--}}
+                            {{--html += '<td contenteditable id="CreatedOn"></td>';--}}
+                            {{--html += '<td contenteditable id="action"></td></tr>';--}}
+
+                            {{--for (var count = 0 ; count < data.length() ; count ++){--}}
+                                {{--html += '<tr>';--}}
+                                {{--html += '<td contenteditable class="column_name" data-column_name="CreatedOn" data-id="'+data[count].id+'">'+data[count].CreatedOn+'</td>';--}}
+                                {{--html += '<td contenteditable class="column_name" data-column_name="action" data-id="'+data[count].id+'">'+data[count].action+'</td></tr>';--}}
+                            {{--}--}}
+                            {{--$('tbody').html(html);--}}
+                        {{--}--}}
+                    {{--})--}}
+            {{----}}
+        {{--}--}}
+        {{----}}
+    {{--})--}}
+{{--</script>--}}
 </body>
 </html>

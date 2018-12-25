@@ -228,6 +228,6 @@
 <script src="/HUB/public/js/world.js"></script>
 <!-- Custom Theme Scripts -->
 <script src="/HUB/public/js/morris.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+{{--<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>--}}
 </body>
 </html>

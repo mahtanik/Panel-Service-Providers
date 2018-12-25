@@ -4,57 +4,65 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Input;
+use PhpParser\Node\Expr\Cast;
 
 class ServiceController extends Controller
 {
+
     public function service_summary()
     {
         $services = DB::select('select service_name from service_details2');
+        $selectedService = Input::get('selectService');
 
-        return view('servicesSummary', ['services'=>$services]);
+        $ids = DB::table('service_details2')->select('service_id')->where('service_name' , $selectedService)->pluck('service_id')->first();
+        $date = DB::table('tb_transactions')->where('serviceId' , $ids )->take(30)->pluck('CreatedOn');
+
+        $subs = DB::table('tb_transactions')->where('action' , 'SUBSCRIPTION')->where('serviceId' , $ids)->count();
+        $unsubs = DB::table('tb_transactions')->where('action' ,'UNSUBSCRIPTION')->where('serviceId' , $ids)->count();
+        $autocharges = DB::table('tb_transactions')->where('action' ,  'AUTO_CHARGE')->where('serviceId' , $ids)->count();
+
+        return view('servicesSummary', ['services' => $services , 'selectedService' => $selectedService ,'date'=>$date , 'subs'=>$subs , 'unsubs'=>$unsubs , 'autocharges'=>$autocharges]);
     }
 
-    public function store(Request $request)
-    {
-        $grocery = new Grocery();
-        $grocery->name = $request->name;
-        $grocery->type = $request->type;
-        $grocery->price = $request->price;
-
-        $grocery->save();
-        return response()->json(['success'=>'Data is successfully added']);
-    }
-    
     public function services()
     {
         $services = DB::select('select service_name from service_details2');
+        $selectedService = Input::get('selectService');
 
-        return view('services', ['services'=>$services]);
-    }
+        $ids = DB::table('service_details2')->select('service_id')->where('service_name', $selectedService)->pluck('service_id')->first();
+        $date = DB::table('tb_transactions')->where('serviceId', $ids)->distinct('CreatedOn')->pluck('CreatedOn')->take(30);
+        $subs = array();
+        $unsubs = array();
+        $autocharges = array();
+        $i = 0;
 
+        foreach ($date as $day) {
+            $subs[$i] = DB::table('tb_transactions')->where('action', 'SUBSCRIPTION')->where('serviceId', $ids)->where('CreatedOn', $day)->count();
+            $unsubs[$i] = DB::table('tb_transactions')->where('action', 'UNSUBSCRIPTION')->where('serviceId', $ids)->where('CreatedOn', $day)->count();
+            $autocharges[$i] = DB::table('tb_transactions')->where('action', 'AUTO_CHARGE')->where('serviceId', $ids)->where('CreatedOn', $day)->count();
+            $i++;
+        }
 
+        $j = 0;
+        $user_number=array();
+        $user_status=array();
+        $user_charges=array();
+        $user_certificate=array();
 
-//    public function counter()
-//    {
-//        $autocharges = DB::table('transactions_1513991762415000038187743')->where('action' , 'AUTO_CHARGE')->count();
-//        //$a = DB::table('transactions_1513991762415000038187743')->join('transactions_1513991762415000000015575' , 'transactions_1513991762415000038187743'.action , '=' , 'ransactions_1513991762415000000015575.action' )
-//        $unsubs = DB::table('transactions_1513991762415000038187743')->where('action' , 'UNSUBSCRIPTION')->count();
-//        $subs = DB::table('transactions_1513991762415000038187743')->where('action' , 'SUBSCRIPTION')->count();
-//        $total = DB::table('transactions_1513991762415000038187743')->count();
-//        $totalcharge = DB::table('transactions_1513991762415000038187743')->where( 'action' , 'AUTO_CHARGE')->orwhere( 'action' , 'SUBSCRIPTION')->count();
-//        return view('dashboard' , [ 'autocharges' => $autocharges , 'unsubs' => $unsubs , 'subs'=>$subs , 'total'=> $total , 'totalcharge'=>$totalcharge]);
-//}
+        $users = DB::table('tb_users')->where('service_id',$ids)->take(20)->get();
+    //dd($users);
+        foreach ($users as $user) {
+            $user_number[$j] = $user->msisdn;
+            $user_certificate[$j]= $user->certification;
+            $user_charges[$j]= $user->auto_charge;
+            $user_status[$j]= $user->status;
+            $j++;
+        }
 
-    public function giveDetails(){
+            return view('services', ['users'=>$users , 'user_certificate'=>$user_certificate , 'user_number'=>$user_number , 'user_status'=>$user_status , 'user_charges'=>$user_charges , 'date' => $date, 'services' => $services, 'selectedService' => $selectedService, 'ids' => $ids, 'subs' => $subs, 'unsubs' => $unsubs, 'autocharges' => $autocharges]);
 
-        $user = DB::table('tb_user')->select('msisdn')->get();
-        $mobilenum = DB::table('transactions_1513991762415000000015575')->select('msisdn')->get();
-        $certificate = DB::table('tb_users')->select('certification')->join('transactions_1513991762415000000015575' ,'transactions_1513991762415000000015575.msisdn' , '=' , 'tb_users.msisdn')->get();
-        $CreatedOn = DB::table('tb_users')->select('CreatedOn')->join('transactions_1513991762415000000015575' , 'transactions_1513991762415000000015575.msisdn' , '=' , 'tb_users.msisdn' )->get();
-        $status = DB::table('tb_users')->select('status')->join('transactions_1513991762415000000015575' , 'transactions_1513991762415000000015575.msisdn' , '=' , 'tb_users.msisdn' )->get();
-
-        return view('services' , [ 'user'=>$user , 'mobilenum' => $mobilenum , 'certificate'=> $certificate , 'CreatedOn'=>$CreatedOn , 'status'=>$status]);
-    }
+        }
 
 
 }
