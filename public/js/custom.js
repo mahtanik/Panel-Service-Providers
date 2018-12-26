@@ -2623,7 +2623,7 @@ if (typeof NProgress != 'undefined') {
 			}
 			
 			if ($('#graphx').length ){
-			
+
 				Morris.Bar({
 				  element: 'graphx',
 				  data: [

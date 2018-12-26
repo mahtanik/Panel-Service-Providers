@@ -30,6 +30,11 @@ class dashboardController extends Controller
         // calcularing the top four services to dispaly in donut-chart
         $topfour = DB::table( 'transactions_1513991762415000000015575')->select('id')->groupBy('id')->offset(0)->limit(10)->get();
 
-        return view('dashboard' , [ 'autocharges' => $autocharges , 'unsubs' => $unsubs , 'subs'=>$subs , 'total'=> $total , 'totalcharge'=>$totalcharge , 'topfour'=> $topfour]);
+
+        $servicesShare = DB::table('shareofservices')->orderBy('transactions')->pluck('service_id');
+
+        $servicesShare->transactions = DB::table('tb_transactions')->where('id',$servicesShare)->count();
+
+        return view('dashboard' , [ 'servicesShare'=>$servicesShare , 'autocharges' => $autocharges , 'unsubs' => $unsubs , 'subs'=>$subs , 'total'=> $total , 'totalcharge'=>$totalcharge , 'topfour'=> $topfour]);
     }
 }

@@ -1,81 +1,45 @@
 <!DOCTYPE html>
 <html lang="fa">
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <!-- Meta, title, CSS, favicons, etc. -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Bootstrap -->
-    <link href="/HUB/public/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome -->
-    <link href="/HUB/public/css/font-awesome.min.css" rel="stylesheet">
-    <!-- NProgress -->
-    <link href="/HUB/public/css/nprogress.css" rel="stylesheet">
-    <!-- bootstrap-progressbar -->
-    <link href="/HUB/public/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
-    <!-- bootstrap-daterangepicker -->
-    <link href="/HUB/public/css/daterangepicker.css" rel="stylesheet">
-    <!-- Custom Theme Style -->
-    <link href="/HUB/public/css/custom.min.css" rel="stylesheet">
-</head>
-<body class="login">
-<div>
-    <a class="hiddenanchor" id="signup"></a>
-    <a class="hiddenanchor" id="signin"></a>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <!-- Meta, title, CSS, favicons, etc. -->
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- Bootstrap -->
+        <link href="/HUB/public/css/bootstrap.min.css" rel="stylesheet">
+        <!-- Font Awesome -->
+        <link href="/HUB/public/css/font-awesome.min.css" rel="stylesheet">
+        <!-- NProgress -->
+        <link href="/HUB/public/css/nprogress.css" rel="stylesheet">
+        <!-- bootstrap-progressbar -->
+        <link href="/HUB/public/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
+        <!-- bootstrap-daterangepicker -->
+        <link href="/HUB/public/css/daterangepicker.css" rel="stylesheet">
+        <!-- Custom Theme Style -->
+        <link href="/HUB/public/css/custom.min.css" rel="stylesheet">
+    </head>
+    <body><
+        {{ Form::open(array('url' => 'login')) }}
 
-    <div class="login_wrapper">
-        <div class="animate form login_form">
-            <section class="login_content">
-                <form>
+
                     <h1>ورود به پنل مدیریت</h1>
-                    <div>
-                        <input type="text" class="form-control" placeholder="Username" required="" />
-                    </div>
-                    <div>
-                        <input type="password" class="form-control" placeholder="Password" required="" />
-                    </div>
-                    <div>
-                        <a class="btn btn-default submit" href="dashboard">Log in</a>
-                        <!--                <a class="reset_pass" href="#">Lost your password?</a>-->
-                    </div>
-                    <div class="clearfix"></div>
-                    <div class="separator">
-                        <div class="clearfix"></div>
-                        <br />
-                    </div>
-                </form>
-            </section>
-        </div>
+                    <!-- if there are login errors, show them here -->
+                    <p>
+                        {{ $errors->first('email') }}
+                        {{ $errors->first('password') }}
+                    </p>
+                    <p>
+                        {{ Form::label('email', 'Email Address') }}
+                        {{ Form::text('email', Input::old('email'), array('placeholder' => 'awesome@awesome.com')) }}
+                    </p>
+                    <p>
+                        {{ Form::label('password', 'Password') }}
+                        {{ Form::password('password') }}</p>
 
-        <div id="register" class="animate form registration_form">
-            <section class="login_content">
-                <form>
-                    <h1>Create Account</h1>
-                    <div>
-                        <input type="text" class="form-control" placeholder="Username" required="" />
-                    </div>
-                    <div>
-                        <input type="email" class="form-control" placeholder="Email" required="" />
-                    </div>
-                    <div>
-                        <input type="password" class="form-control" placeholder="Password" required="" />
-                    </div>
-                    <div>
-                        <a class="btn btn-default submit" href="dashboard">Submit</a>
-                    </div>
-                    <div class="clearfix"></div>
-                    <div class="separator">
-                        <p class="change_link">Already a member ?
-                            <a href="#signin" class="to_register"> Log in </a>
-                        </p>
-                        <div class="clearfix"></div>
-                        <br />
-                    </div>
-                </form>
-            </section>
-        </div>
-    </div>
-</div>
-</body>
+                    <p>{{ Form::submit('Submit!') }}</p>
+                    {{ Form::close() }}
+                {{--</form>--}}
+            {{--</section>--}}
+    </body>
 </html>

@@ -175,6 +175,7 @@
                                 </div>
                             </div>
                         </div>
+                        {{$servicesShare->transactions}}
                         <div class="col-md-6 col-sm-6 col-xs-2">
                             <div class="x_panel">
                                 <div class="x_title">
@@ -198,6 +199,9 @@
             </div>
         </div>
     </div>
+    <script>
+
+    </script>
     <!-- jQuery -->
     <script src="/HUB/public/js/jquery.min.js"></script>
     <!-- Bootstrap -->

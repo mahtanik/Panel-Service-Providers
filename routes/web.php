@@ -21,7 +21,13 @@ Route::get('/', function () {
 //coming soon
 //Route::get('/campaignesDiagrams' , 'PageController@Datarep_campaignes');
 
-Route::get('/login' , 'PageController@login');
+//Route::get('/login' , 'loginController@login');
+
+// route to show the login form
+Route::get('login', array('uses' => 'LoginController@showLogin'));
+
+// route to process the form
+Route::post('login', array('uses' => 'LoginController@doLogin'));
 
 Route::get('/servicesSummary' , 'ServiceController@service_summary' );
 
@@ -31,3 +37,7 @@ Route::get('/servicesDiagrams' , 'serviceDiagramsController@Fill' );
 
 Route::get('/dashboard' , 'dashboardController@counter');
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

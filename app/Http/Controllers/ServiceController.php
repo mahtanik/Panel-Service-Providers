@@ -38,9 +38,9 @@ class ServiceController extends Controller
         $i = 0;
 
         foreach ($date as $day) {
-            $subs[$i] = DB::table('tb_transactions')->where('action', 'SUBSCRIPTION')->where('serviceId', $ids)->where('CreatedOn', $day)->count();
-            $unsubs[$i] = DB::table('tb_transactions')->where('action', 'UNSUBSCRIPTION')->where('serviceId', $ids)->where('CreatedOn', $day)->count();
-            $autocharges[$i] = DB::table('tb_transactions')->where('action', 'AUTO_CHARGE')->where('serviceId', $ids)->where('CreatedOn', $day)->count();
+            $subs[$i] = DB::table('tb_transactions')->where('action', 'SUBSCRIPTION')->where('serviceId', $ids)->whereDate('CreatedOn', $day)->count();
+            $unsubs[$i] = DB::table('tb_transactions')->where('action', 'UNSUBSCRIPTION')->where('serviceId', $ids)->whereDate('CreatedOn', $day)->count();
+            $autocharges[$i] = DB::table('tb_transactions')->where('action', 'AUTO_CHARGE')->where('serviceId', $ids)->whereDate('CreatedOn', $day)->count();
             $i++;
         }
 

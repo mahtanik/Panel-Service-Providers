@@ -107,7 +107,7 @@
                                 <a style="font-style: italic"><i class="fa fa-bar-chart-o"></i>    نمودار <span class="fa fa-chevron-down"></span></a>
                                 <ul dir="rtl" class="nav child_menu">
                                     <li><a href="servicesDiagrams"> سرویس ها </a></li>
-                                    <li><a class="isDisabled"href="campaignesDiagrams">کمپین ها</a></li>
+                                    <li><a title="به زودی" disabled="disabled" style="color: powderblue ">کمپین ها</a></li>
                                 </ul>
                             </li>
                             <li>
@@ -118,7 +118,7 @@
                                 </ul>
                             </li>
                             <li>
-                                <a class="isDisabled" href="campaignes" style="font-style: italic"; ><i class="fa fa-tags"></i>کمپین ها  </a>
+                                <a title="به زودی" style="font-style: italic; color: powderblue" ><i class="fa fa-tags" style="color: powderblue"></i>کمپین ها  </a>
                             </li>
                         </ul>
                     </div>
