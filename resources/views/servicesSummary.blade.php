@@ -30,46 +30,44 @@
 </head>
 <body class="nav-md">
 <!-- Modal -->
-<div class="modal fade" id="myModal" role="dialog" dir="ltr">
+<div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog">
 
         <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Modal Header</h4>
+                <h4 class="modal-title" style="color: #985f0d">لیست کاربران</h4>
             </div>
             <div class="modal-body">
                 <table class="table table-striped">
                     <thead>
                     <tr>
-                        <th>Firstname</th>
-                        <th>Lastname</th>
-                        <th>Email</th>
+                        <th>تاریخ فعالسازی</th>
+                        <th> شماره موبایل</th>
+                        <th>اقدام</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>John</td>
-                        <td>Doe</td>
-                        <td>john@example.com</td>
-                    </tr>
-                    <tr>
-                        <td>Mary</td>
-                        <td>Moe</td>
-                        <td>mary@example.com</td>
-                    </tr>
-                    <tr>
-                        <td>July</td>
-                        <td>Dooley</td>
-                        <td>july@example.com</td>
-                    </tr>
+                    <?php $j = 0 ?>
+                    @foreach( $users as $user)
+                        <tr>
+                            <td>{{$user_CreatedOn[$j]}}</td>
+                            <td> {{$user_number[$j]}}</td>
+                            <td> {{$user_action[$j]}}</td>
+                            <?php $j++ ?>
+                        </tr>
+                    @endforeach
                     </tbody>
                 </table>
+            </div>
+            <div class = modal-footer>
+                <button type="button" class="close" data-dismiss="modal">ok</button>
             </div>
         </div>
     </div>
 </div>
+<!-- Modal -->
 
 <div class="container body">
     <div class="main_container">
@@ -194,36 +192,28 @@
                             <div class="x_content">
                                 <table id="datatable-buttons" class="table table-striped table-bordered">
                                     <thead>
-                                    <tr>
-                                        <th>تاریخ</th>
-                                        <th>درآمد موفق</th>
-                                        <th>تعداد شارژ</th>
-                                        <th>تعداد فعالسازی </th>
-                                        <th>تعداد غیرفعال سازی</th>
-                                    </tr>
+                                        <tr>
+                                            <th>تاریخ</th>
+                                            {{--<th>درآمد موفق</th>--}}
+                                            <th>تعداد شارژ</th>
+                                            <th>تعداد فعالسازی </th>
+                                            <th>تعداد غیرفعال سازی</th>
+                                            <th>لیست کاربران</th>
+                                        </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach( $date as $day)
-                                        <tr>
-                                            <td>{{$day}}</td>
-                                            <td> - </td>
-                                            <td> {{$autocharges}} </td>
-                                            <td> {{$subs}} </td>
-                                            <td> {{$unsubs}} </td>
-                                        </tr>
-                                    @endforeach
-                                    @foreach( $date as $day)
-                                        <?php for ($i=0;$i<=10;$i++) { ?>
-
-                                        <tr>
-                                            <td>{{$day}}</td>
-                                            <td> - </td>
-                                            <td> {{$autocharges}} </td>
-                                            <td> {{$subs[$i]}} </td>
-                                            <td>{{$unsubs}}</td>
-                                        </tr>
-                                        <?php } ?>
-                                    @endforeach
+                                        @foreach( $details as $detail)
+                                            <tr>
+                                                @if ($detail->serviceId == $ids)
+                                                        <td>{{$detail->CreatedOn}}</td>
+                                                        {{--<td>  </td>--}}
+                                                        <td> {{$detail->AUTO_CHARGE}} </td>
+                                                        <td> {{$detail->SUBSCRIPTION}} </td>
+                                                        <td> {{$detail->UNSUBSCRIPTION}} </td>
+                                                       <td><a data-toggle="modal" href="#myModal"><i class="fa fa-external-link"></i></a></td>
+                                                @endif
+                                            </tr>
+                                            @endforeach
                                     </tbody>
                                 </table>
                             </div>

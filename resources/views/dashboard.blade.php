@@ -175,7 +175,7 @@
                                 </div>
                             </div>
                         </div>
-                        {{$servicesShare->transactions}}
+                        {{--{{$servicesShare->transactions}}--}}
                         <div class="col-md-6 col-sm-6 col-xs-2">
                             <div class="x_panel">
                                 <div class="x_title">

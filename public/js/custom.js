@@ -1586,8 +1586,8 @@ if (typeof NProgress != 'undefined') {
 			var optionSet1 = {
 			  startDate: moment().subtract(29, 'days'),
 			  endDate: moment(),
-			  minDate: '01/01/2012',
-			  maxDate: '12/31/2015',
+			  minDate: '12/31/2015',
+			  maxDate: '12/31/2018',
 			  dateLimit: {
 				days: 60
 			  },
@@ -1614,7 +1614,7 @@ if (typeof NProgress != 'undefined') {
 				fromLabel: 'از',
 				toLabel: 'تا',
 				customRangeLabel: 'متغیر',
-				daysOfWeek: ['شنبه', 'یکشنبه', 'دوشنبه', 'سهشنبه', 'چهارشنبه', 'پنجشنبه', 'جمعه'],
+				daysOfWeek: ['', 'یکشنبه', 'دوشنبه', 'سهشنبه', 'چهارشنبه', 'پنجشنبه', 'جمعه'],
 				monthNames: ['فروردین', 'اردیبهشت', 'خرداد', 'تیر', 'مرداد', 'شهریور', 'مهر', 'آبان', 'آذر', 'دی', 'بهمن', 'اسفند'],
 				firstDay: 1
 			  }

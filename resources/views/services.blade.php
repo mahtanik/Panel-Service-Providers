@@ -39,12 +39,13 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Modal Header</h4>
+                <h4 class="modal-title" style="color: #985f0d">لیست کاربران</h4>
             </div>
             <div class="modal-body">
                 <table class="table table-striped">
                     <thead>
                     <tr>
+                        <th>تاریخ فعالسازی</th>
                         <th> شماره موبایل</th>
                         <th>نحوه فعالسازی</th>
                         <th>تعداد شارژ</th>
@@ -52,16 +53,17 @@
                     </tr>
                     </thead>
                     <tbody>
-                            @foreach( $users as $user)
-                                    <?php for ($j=0;$j<=10;$j++) { ?>
-                                    <tr>
-                                        <td> {{$user_number[$j]}}</td>
-                                        <td> {{$user_certificate[$j]}}</td>
-                                        <td> {{$user_charges[$j]}}</td>
-                                        <td> {{$user_status[$j]}}</td>
-                                    </tr>
-                                    <?php } ?>
-                            @endforeach
+                    <?php $j = 0 ?>
+                    @foreach( $users as $user)
+                        <tr>
+                            <td>{{$user_CreatedOn[$j]}}</td>
+                            <td> {{$user_number[$j]}}</td>
+                            <td> {{$user_certificate[$j]}}</td>
+                            <td> {{$user_charges[$j]}}</td>
+                            <td> {{$user_status[$j]}}</td>
+                            <?php $j++ ?>
+                        </tr>
+                    @endforeach
                     </tbody>
                 </table>
             </div>
@@ -197,32 +199,25 @@
                                     <thead>
                                     <tr>
                                         <th>تاریخ</th>
-                                        {{--<th hidden>غیرفعال دائمی</th>--}}
-                                        {{--<th hidden>فعال دائمی</th>--}}
-                                        {{--<th hidden>غیرفعال اعتباری</th>--}}
-                                        {{--<th hidden>فعال اعتباری</th>--}}
                                         <th>کل فعال مانده</th>
                                         <th>کل غیرفعالسازی ها</th>
                                         <th>کل فعالسازی ها</th>
+                                        <th>کل شارژ ها</th>
                                         <th>اطلاعات و جزییات</th>
                                     </tr>
                                     </thead>
                                     <tbody>
+                                    <?php $i=0 ?>
                                     @foreach( $date as $day)
-                                        <?php for ($i=0;$i<=10;$i++) { ?>
-
                                         <tr>
                                             <td>{{$day}}</td>
-                                            {{--<td> - </td>--}}
-                                            {{--<td> - </td>--}}
-                                            {{--<td> - </td>--}}
-                                            {{--<td> - </td>--}}
                                             <td> {{$subs[$i] + $autocharges[$i]}} </td>
                                             <td> {{$unsubs[$i]}} </td>
                                             <td> {{$subs[$i]}} </td>
+                                            <td> {{$autocharges[$i]}}</td>
                                             <td><a data-toggle="modal" href="#myModal"><i class="fa fa-external-link"></i></a></td>
+                                            <?php $i++ ?>
                                         </tr>
-                                        <?php } ?>
                                     @endforeach
                                     </tbody>
                                 </table>
