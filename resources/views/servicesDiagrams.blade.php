@@ -135,6 +135,7 @@
                                         <span data-brackets-id="2091"></span> <b data-brackets-id="2092" class="caret"></b>
                                     </div>
                                     <br>
+                                    <span id="serviceId" style="display: none">{{$id}}</span>
                                     <br>
                                     <form>انتخاب کنید :
                                         <select name="selectService">
@@ -142,10 +143,11 @@
                                                 <option> {{ $service->service_name }} </option>
                                             @endforeach
                                         </select>
-                                        <input type='submit' name='submit' placeholder='اعمال'>
+                                        <input  class="use-address"  type='submit' name='submit' placeholder='اعمال'>
                                     </form>
                                     <br>
-                                    <h2 dir='rtl' data-brackets-id="2098" style="font-style: italic; float: right">  تغییرات اخیر و نمودار میله ای در سرویس {{$selectedService}}  <small data-brackets-id="2099" style="font-style: italic"> شارژ ها و کاربران جدید برحسب زمان میزان  </small></h2>
+                                    <h2 dir='rtl' data-brackets-id="2098" style="font-style: italic; float: right">  تغییرات اخیر و نمودار میله ای در سرویس
+                                        <b>{{$selectedService}}</b>  <small data-brackets-id="2099" style="font-style: italic"> شارژ ها و کاربران جدید برحسب زمان میزان  </small></h2>
                                 </div>
                                 <div data-brackets-id="2100" class="clearfix"></div>
                             </div>
@@ -186,52 +188,47 @@
         </div>
     </div>
     <script>
-        $(document).ready(function(){
+        $(".use-address").click(function() {
+
+            var serviceId = $('#serviceId').text();
+
+            var today = new Date();
+            var mm = today.getMonth()+1;
+
+            console.log('s: '+serviceId)
+            console.log('m: '+mm)
+
             $.ajax({
-                url: "",
-                method: "GET",
-                success: function(details) {
-                    console.log(details);
-                    var autocharges = [];
-                    var subs = [];
-                    var unsubs = [];
-                    var total = [];
-                    var month = [];
-
-                    for(var i in details) {
-                        for (var j in details[i]) {
-                            autocharges.push(data[i][j]);
-                            subs.push(details[i][j+1]);
-                            unsubs.push(details[i][j+2]);
-                            total.push(details[i][j+3]);
-                            month.push(details[i][j+4]);
-                        }
-                    }
-                    var chartdata = {
-                        labels: player,
-                        datasets : [
-                            {
-                                label: 'Player Score',
-                                backgroundColor: 'rgba(200, 200, 200, 0.75)',
-                                borderColor: 'rgba(200, 200, 200, 0.75)',
-                                hoverBackgroundColor: 'rgba(200, 200, 200, 1)',
-                                hoverBorderColor: 'rgba(200, 200, 200, 1)',
-                                data: subs
-                            }
-                        ]
-                    };
-                    var ctx = $("#mycanvas");
-
-                    var barGraph = new Chart(ctx, {
-                        type: 'bar',
-                        data: chartdata
-                    });
+                type: 'get',
+                url: 'servicesDiagrams2',
+                data: {
+                    'mm': mm ,
+                    'ss' : serviceId
                 },
-                error: function(data) {
-                    console.log(data);
+
+                success: function (data) {
+                    if ($('#graphx').length ){
+
+                        Morris.Bar({
+                            element: 'graphx',
+                            data: [
+
+                            ],
+                            xkey: 'x',
+                            ykeys: ['y', 'z', 'a' ,'b'],
+                            barColors: ['#26B99A', '#34495E', '#ACADAC', '#3498DB' , '#ACADAC'],
+                            hideHover: 'auto',
+                            labels: ['تمام مشترکین', 'فعالسازی' , 'غیرفعالسازی' , 'تعداد شارژ'],
+                            resize: true
+                        }).on('click', function (i, row) {
+                            console.log(i, row);
+                        });
+                    }
                 }
-            });
+            })
         });
+
+
     </script>
     <!-- jQuery -->
     <script src="/HUB/public/js/jquery.min.js"></script>

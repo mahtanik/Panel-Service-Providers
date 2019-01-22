@@ -35,9 +35,16 @@ Route::get('/services' , 'ServiceController@services' );
 
 Route::get('/servicesDiagrams' , 'serviceDiagramsController@Fill' );
 
+Route::get('/servicesDiagrams2' , 'serviceDiagramsController@Diagrams' );
+
 Route::get('/dashboard' , 'dashboardController@counter');
 
+Route :: get('/serviceSummary2' , 'ServiceController@updateUsersRecord');
+
+Route:: get('/services2' , 'ServiceController@AllUsersRecord');
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+//route for updating user records in serviceSummary and services pages
