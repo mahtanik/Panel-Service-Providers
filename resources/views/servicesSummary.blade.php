@@ -1,8 +1,6 @@
 <html lang="fa" dir="rtl">
     <head>
-
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
         <!-- Meta, title, CSS, favicons, etc. -->
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -19,6 +17,9 @@
         <link href="/HUB/public/css/daterangepicker.css" rel="stylesheet">
         <!-- Custom Theme Style -->
         <link href="/HUB/public/css/custom.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="HUB/public/css/persian.datepicker.css"/>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
         <style>
             .isDisabled {
                 color: currentColor;
@@ -29,6 +30,8 @@
             }
         </style>
 
+        <script src="HUB/public/js/persian.date.js"></script>
+        <script src="HUB/public/js/persian.datepicker.js"></script>
         <script src="/HUB/public/js/jquery.min.js"></script>
         <!-- Bootstrap -->
         <script src="/HUB/public/js/bootstrap.min.js"></script>
@@ -107,7 +110,10 @@
                                 </tr>
                             </thead>
                             <tbody id="user_table_body">
-
+                               <tr>
+                                   <td></td>
+                                   <td></td>
+                               </tr>
                             </tbody>
                         </table>
                     </div>
@@ -221,9 +227,10 @@
                                         <div data-brackets-id="2088" class="col-md-6" style="float: right">
                                             <div data-brackets-id="2089" id="reportrange" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc">
                                                 <i data-brackets-id="2090" class="glyphicon glyphicon-calendar fa fa-calendar"></i>
-                                                <span data-brackets-id="2091"></span> <b data-brackets-id="2092" class="caret"></b>
+                                                <span id="DatePicker" data-brackets-id="2091"></span> <b data-brackets-id="2092" class="caret"></b>
                                             </div>
                                             <br/>
+                                            <span id="serviceId" style="display: none">{{$id}}</span>
                                             <br>
                                             <form>انتخاب کنید :
                                                 <select name="selectService">
@@ -235,12 +242,14 @@
                                             </form>
                                         </div>
                                         <div class="clearfix"></div>
-                                        <i class="fa-circle"></i><strong style="color: #985f0d">سرویس {{$selectedService}}</strong>
+                                        <i class="fa-circle"></i><strong style="color: #985f0d">سرویس  {{$selectedService}}</strong>
+                                        <b id="selected"></b>
                                     </div>
                                     <div class="x_content">
                                         <br>
                                         <p><b style="border : 3px;border-style:solid; border-color: #3d4852; padding: 1em;">
-                                            تعداد کل کاربران فعال سرویس : {{ $allusers }}
+                                            تعداد کل کاربران فعال سرویس :
+                                                {{$allusers}}
                                             </b></p>
                                         <br>
                                         <table id="datatable-buttons" class="table table-striped table-bordered">
@@ -253,18 +262,17 @@
                                                     <th>لیست کاربران</th>
                                                 </tr>
                                             </thead>
-                                            <span id="serviceId" style="display: none">{{$id}}</span>
 
                                             <tbody>
                                                 @foreach( $details as $detail)
                                                     <tr>
-                                                        @if ($detail->serviceId == $id)
+                                                        {{--@if ($detail->serviceId == $id)--}}
                                                             <td class="date">{{$detail->CreatedOn}}</td>
                                                             <td> {{$detail->AUTO_CHARGE}} </td>
                                                             <td> {{$detail->SUBSCRIPTION}} </td>
                                                             <td> {{$detail->UNSUBSCRIPTION}} </td>
                                                             <td><a data-toggle="modal" href="#myModal" ><i class="fa fa-external-link use-address" ></i></a></td>
-                                                        @endif
+                                                        {{--@endif--}}
                                                     </tr>
                                                 @endforeach
                                             </tbody>
@@ -277,13 +285,15 @@
                 </div>
             </div>
         </div>
+
         <script>
 
             $(".use-address").click(function() {
-                var $row = $(this).closest("tr");    // Find the row
-                var $date = $row.find(".date").text(); // Find the text
 
                 var serviceId = $('#serviceId').text();
+
+                var $row = $(this).closest("tr");    // Find the row
+                var $date = $row.find(".date").text(); // Find the text
 
                 console.log('date: '+ $date)
                 console.log('s: '+serviceId)
@@ -299,9 +309,11 @@
                     success: function (data) {
                         var tablebody = document.getElementById("user_table_body");
 
+
+                        $('#user_table_body').empty();
+
                         for( var i = 0 ; i< data['user_number'].length ; i++){
                             var tr = document.createElement('TR');
-                            tablebody.appendChild(tr)
 
                             var td1 = document.createElement('TD');
                             td1.appendChild(document.createTextNode(data['user_action'][i]));
@@ -311,12 +323,16 @@
 
                             tr.appendChild(td2);
                             tr.appendChild(td1);
+
+                            tablebody.appendChild(tr);
+
                         }
                     }
+
                 })
             });
-
         </script>
+
         <!-- jQuery -->
         <script src="/HUB/public/js/custom.min.js"></script>
     </body>

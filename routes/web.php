@@ -10,6 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Auth::routes();
 
 Route::get('/', function () {
     return view('login' , 'PageController@login');
@@ -29,22 +30,25 @@ Route::get('login', array('uses' => 'LoginController@showLogin'));
 // route to process the form
 Route::post('login', array('uses' => 'LoginController@doLogin'));
 
+//Route::get('/servicesSummary3' , 'ServiceController@service_summary' );
+
+Route :: get('/serviceSummary2' , 'ServiceController@updateUsersRecord');
+
 Route::get('/servicesSummary' , 'ServiceController@service_summary' );
 
 Route::get('/services' , 'ServiceController@services' );
 
-Route::get('/servicesDiagrams' , 'serviceDiagramsController@Fill' );
+Route::get('/servicesDiagrams' , 'ServiceDiagramsController@Fill_init' );
 
-Route::get('/servicesDiagrams2' , 'serviceDiagramsController@Diagrams' );
+//Route::get('/servicesDiagrams2' , 'ServiceDiagramsController@Diagrams' );
 
-Route::get('/dashboard' , 'dashboardController@counter');
+Route::get('servicesDiagrams3' , 'ServiceDiagramsController@Fill' );
 
-Route :: get('/serviceSummary2' , 'ServiceController@updateUsersRecord');
+Route::get('/dashboard' , 'DashboardController@counter');
 
-Route:: get('/services2' , 'ServiceController@AllUsersRecord');
-
-Auth::routes();
+Route:: get('/services2' , 'ServiceController@allUsersRecord');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
 //route for updating user records in serviceSummary and services pages
+

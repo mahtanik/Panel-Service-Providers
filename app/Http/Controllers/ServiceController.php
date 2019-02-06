@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use function Couchbase\defaultDecoder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
@@ -15,10 +16,9 @@ class ServiceController extends Controller
         $selectedService = Input::get('selectService');
         $id = DB::table('service_details2')->select('service_id')->where('service_name' , $selectedService)->pluck('service_id')->first();
         $details = DB::select('select serviceId,CreatedOn,SUM(CASE WHEN action="SUBSCRIPTION" THEN 1 ELSE 0 END) AS "SUBSCRIPTION",SUM(CASE WHEN action="UNSUBSCRIPTION" THEN 1 ELSE 0 END) AS "UNSUBSCRIPTION",SUM(CASE WHEN action="AUTO_CHARGE" THEN 1 ELSE 0 END) AS "AUTO_CHARGE" from tb_transactions GROUP BY serviceId,CreatedOn ORDER BY CreatedOn ');
-
         $allusers = DB::table('tb_users')->where('service_id',$id)->where('status','sub')->count();
 
-        return view('servicesSummary', ['allusers'=>$allusers ,  'id'=>$id , 'details'=>$details  , 'services' => $services , 'selectedService' => $selectedService]);
+        return view('servicesSummary', ['id'=>$id , 'allusers'=>$allusers ,  'id'=>$id , 'details'=>$details  , 'services' => $services , 'selectedService' => $selectedService]);
     }
 
     //serviceSummary Page
@@ -45,26 +45,28 @@ class ServiceController extends Controller
     }
 
     //servicesPage
-    public function AllUsersRecord(Request $request){
+    public function allUsersRecord(Request $req){
 
-        $date = $request->get('dd');
-        $serviceId = $request->get('ss');
+        $date = $req->get('date');
+        $serviceId = $req->get('service');
 
+//        dd($req);
         $j = 0;
         $user_numbers=array();
         $user_status=array();
         $user_charges=array();
         $user_certificate=array();
         $user_CreatedOn = array();
-        $users = DB::table('tb_users')->where('service_id',$serviceId)->whereDate('CreatedOn' , $date)->get();
+        $users = DB::table('tb_users')->where('service_id' , $serviceId)->where('CreatedOn' , $date)->get();
         foreach ($users as $user) {
             $user_numbers[$j] = $user->msisdn;
-            $user_charges[$j]= $user->auto_charge;
-            $user_certificate[$j]= $user->certification;
-            $user_status[$j]= $user->status;
+            $user_charges[$j] = $user->auto_charge;
+            $user_certificate[$j] = $user->certification;
+            $user_status[$j] = $user->status;
             $user_CreatedOn[$j] = $user->CreatedOn;
             $j++;
         }
+
 
         return compact('user_numbers' , 'user_status' , 'user_charges' , 'user_certificate' , 'user_CreatedOn');
     }
@@ -76,12 +78,11 @@ class ServiceController extends Controller
         $selectedService = Input::get('selectService');
         $id = DB::table('service_details2')->select('service_id')->where('service_name', $selectedService)->pluck('service_id')->first();
 
-        $date = DB::table('tb_transactions')->where('serviceId', $id)->distinct('CreatedOn')->pluck('CreatedOn')->take(30);
+        $date = DB::table('tb_transactions')->where('serviceId', $id)->distinct('CreatedOn')->pluck('CreatedOn');
         $subs = array();
         $unsubs = array();
         $autocharges = array();
         $i = 0;
-
 
         foreach ($date as $day) {
             $subs[$i] = DB::table('tb_transactions')->where('action', 'SUBSCRIPTION')->where('serviceId', $id)->whereDate('CreatedOn', $day)->count();
@@ -90,6 +91,7 @@ class ServiceController extends Controller
             $i++;
 
         }
+//        dd($subs);
             return view('services', ['id'=>$id   , 'date' => $date, 'services' => $services, 'selectedService' => $selectedService, 'ids' => $id, 'subs' => $subs, 'unsubs' => $unsubs, 'autocharges' => $autocharges]);
 
     }

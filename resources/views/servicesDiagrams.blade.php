@@ -27,6 +27,49 @@
                 pointer-events: none;
             }
         </style>
+
+        <!-- jQuery -->
+        <script src="/HUB/public/js/jquery.min.js"></script>
+        <!-- Bootstrap -->
+        <script src="/HUB/public/js/bootstrap.min.js"></script>
+        <!-- FastClick -->
+        <script src="/HUB/public/js/fastclick.js"></script>
+        <!-- NProgress -->
+        <script src="/HUB/public/js/nprogress.js"></script>
+        <!-- Chart.js -->
+        <script src="/HUB/public/js/Chart.min.js"></script>
+        <!-- jQuery Sparklines -->
+        <script src="/HUB/public/js/jquery.sparkline.min.js"></script>
+        <!-- morris.js -->
+        <script src="/HUB/public/js/raphael.min.js"></script>
+        <!-- gauge.js -->
+        <script src="/HUB/public/js/gauge.min.js"></script>
+        <!-- bootstrap-progressbar -->
+        <script src="/HUB/public/js/bootstrap-progressbar.min.js"></script>
+        <!-- Skycons -->
+        <script src="/HUB/public/js/skycons.js"></script>
+        <!-- Flot -->
+        <script src="/HUB/public/js/jquery.flot.js"></script>
+        <script src="/HUB/public/js/jquery.flot.pie.js"></script>
+        <script src="/HUB/public/js/jquery.flot.time.js"></script>
+        <script src="/HUB/public/js/jquery.flot.stack.js"></script>
+        <script src="/HUB/public/js/jquery.flot.resize.js"></script>
+        <!-- Flot plugins -->
+        <script src="/HUB/public/js/jquery.flot.orderBars.js"></script>
+        <script src="/HUB/public/js/jquery.flot.spline.min.js"></script>
+        <script src="/HUB/public/js/curvedLines.js"></script>
+        <!-- DateJS -->
+        <script src="/HUB/public/js/date.js"></script>
+        <!-- bootstrap-daterangepicker -->
+        <script src="/HUB/public/js/moment.min.js"></script>
+        <script src="/HUB/public/js/daterangepicker.js"></script>
+        <!-- Custom Theme Scripts -->
+        <!--<script src="build/js/custom.min.js"></script>-->
+        <script src="/HUB/public/js/echarts.min.js"></script>
+        <script src="/HUB/public/js/world.js"></script>
+        <!-- Custom Theme Scripts -->
+        <script src="/HUB/public/js/morris.min.js"></script>
+
     </head>
     <body data-brackets-id="1982" class="nav-sm" style="padding-right: 0px;">
     <div data-brackets-id="1983" class="container body">
@@ -135,51 +178,48 @@
                                         <span data-brackets-id="2091"></span> <b data-brackets-id="2092" class="caret"></b>
                                     </div>
                                     <br>
-                                    <span id="serviceId" style="display: none">{{$id}}</span>
                                     <br>
                                     <form>انتخاب کنید :
-                                        <select name="selectService">
+                                        <select id="selectService">
                                             @foreach( $services as $service)
                                                 <option> {{ $service->service_name }} </option>
                                             @endforeach
                                         </select>
-                                        <input  class="use-address"  type='submit' name='submit' placeholder='اعمال'>
                                     </form>
                                     <br>
                                     <h2 dir='rtl' data-brackets-id="2098" style="font-style: italic; float: right">  تغییرات اخیر و نمودار میله ای در سرویس
-                                        <b>{{$selectedService}}</b>  <small data-brackets-id="2099" style="font-style: italic"> شارژ ها و کاربران جدید برحسب زمان میزان  </small></h2>
+                                        <b id="selected"></b>
+                                        <small data-brackets-id="2099" style="font-style: italic"> شارژ ها و کاربران جدید برحسب زمان میزان  </small></h2>
                                 </div>
                                 <div data-brackets-id="2100" class="clearfix"></div>
                             </div>
                             <div data-brackets-id="2101" class="row tile_count" style="text-align: center">
                                 <div data-brackets-id="2102" class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
                                     <span data-brackets-id="2103" class="count_top"><i data-brackets-id="2104" class="fa fa-user"></i> تعداد کل کربران</span>
-                                    <div data-brackets-id="2105" class="count" lang="fa">{{$total}}</div>
-                                    <span data-brackets-id="2106" class="count_bottom"><i data-brackets-id="2107" class="green"><i data-brackets-id="2108" class="fa fa-sort-asc"></i> ٪۴   </i>   از هقته گذشته</span>
+                                    <div id="total" class="count">0
+                                    </div>
                                 </div>
                                 <div data-brackets-id="2109" class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
                                     <span data-brackets-id="2110" class="count_top"><i data-brackets-id="2111" class="fa fa-clock-o"></i> تعداد کل شارژها</span>
-                                    <div data-brackets-id="2112" class="count">{{$totalcharges}}</div>
-                                    <span data-brackets-id="2113" class="count_bottom"><i data-brackets-id="2114" class="green"><i data-brackets-id="2115" class="fa fa-sort-asc"></i> ۳ %</i> از هقته گذشته</span>
+                                    <div id="totalcharges" class="count">0</div>
+
                                 </div>
                                 <div data-brackets-id="2116" class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
                                     <span data-brackets-id="2117" class="count_top"><i data-brackets-id="2118" class="fa fa-user"></i> تعداد کاربران جدید</span>
-                                    <div data-brackets-id="2119" class="count green">{{$subs}}</div>
-                                    <span data-brackets-id="2120" class="count_bottom"><i data-brackets-id="2121" class="green"><i data-brackets-id="2122" class="fa fa-sort-asc"></i> ۳۴% </i> از هقته گذشته</span>
+                                    <div id="subs" class="count green">0</div>
+
                                 </div>
                                 <div data-brackets-id="2123" class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
                                     <span data-brackets-id="2124" class="count_top"><i data-brackets-id="2125" class="fa fa-user"></i> تعداد کاربرانی که انصراف داده اند</span>
-                                    <div data-brackets-id="2126" class="count">{{$unsubs}}</div>
-                                    <span data-brackets-id="2127" class="count_bottom"><i data-brackets-id="2128" class="red"><i data-brackets-id="2129" class="fa fa-sort-desc"></i> ۱۲ </i> از هقته گذشته</span>
+                                    <div id="unsubs" class="count">0</div>
                                 </div>
                                 <div data-brackets-id="2130" class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
                                     <span data-brackets-id="2131" class="count_top"><i data-brackets-id="2132" class="fa fa-user"></i> تعداد شارژ خودکار</span>
-                                    <div data-brackets-id="2133" class="count">{{$autocharges}}</div>
-                                    <span data-brackets-id="2134" class="count_bottom"><i data-brackets-id="2135" class="green"><i data-brackets-id="2136" class="fa fa-sort-asc"></i> ۳ %</i> از هقته گذشته</span>
+                                    <div id="autocharges" class="count">0</div>
                                 </div>
                             </div>
                             <div  class="x_content2">
-                                <div id="graphx"></div>
+                                <div id="graphx" width="400" height="400" class="charts"></div>
                             </div>
                         </div>
                     </div>
@@ -188,90 +228,75 @@
         </div>
     </div>
     <script>
-        $(".use-address").click(function() {
 
-            var serviceId = $('#serviceId').text();
+        $('#selectService').on('change', function() {
 
-            var today = new Date();
-            var mm = today.getMonth()+1;
+            var selected = this.value;
+            document.getElementById('selected').innerHTML = selected;
 
-            console.log('s: '+serviceId)
-            console.log('m: '+mm)
+            var d = new Date();
+            var month = d.getMonth();
+
+            console.log(month);
 
             $.ajax({
                 type: 'get',
-                url: 'servicesDiagrams2',
+                url: 'servicesDiagrams3',
+
                 data: {
-                    'mm': mm ,
-                    'ss' : serviceId
+                    's' : selected ,
+                    'mm' : '05'
                 },
 
                 success: function (data) {
+
+                    $('.charts').empty();
+
+                    document.getElementById('total').innerHTML = data['total'];
+                    document.getElementById('subs').innerHTML = data['subs'];
+                    document.getElementById('totalcharges').innerHTML = data['totalcharges'];
+                    document.getElementById('unsubs').innerHTML = data['unsubs'];
+                    document.getElementById('autocharges').innerHTML = data['autocharges'];
+
+                    console.log(data['bar_subs'])
+
                     if ($('#graphx').length ){
+                        var sub_array = Object.values(data['bar_subs']);
+                        var unsub_array = Object.values(data['bar_unsubs']);
+                        var total_array = Object.values(data['bar_total']);
+                        var chart_data_array = [];
+
+                        for (var i = 0; i< 3 ; i++) {
+                            var keys = ['y', 'z', 'a', 'x'];
+                            var values1 = [sub_array[i],unsub_array[i],total_array[i],data['months'][i]];
+                            var result1 = {};
+                            keys.forEach((key, i) => result1[key] = values1[i]);
+
+                            chart_data_array[i] = result1;
+                        }
+                        console.log(chart_data_array);
 
                         Morris.Bar({
                             element: 'graphx',
-                            data: [
-
-                            ],
+                            data: chart_data_array,
                             xkey: 'x',
-                            ykeys: ['y', 'z', 'a' ,'b'],
+                            ykeys: ['y', 'z', 'a'],
                             barColors: ['#26B99A', '#34495E', '#ACADAC', '#3498DB' , '#ACADAC'],
                             hideHover: 'auto',
-                            labels: ['تمام مشترکین', 'فعالسازی' , 'غیرفعالسازی' , 'تعداد شارژ'],
+                            labels: [ 'فعالسازی'  ,   'غیرفعالسازی' , 'تمام مشترکین'],
                             resize: true
                         }).on('click', function (i, row) {
                             console.log(i, row);
                         });
                     }
+
                 }
             })
         });
 
-
     </script>
-    <!-- jQuery -->
-    <script src="/HUB/public/js/jquery.min.js"></script>
-    <!-- Bootstrap -->
-    <script src="/HUB/public/js/bootstrap.min.js"></script>
-    <!-- FastClick -->
-    <script src="/HUB/public/js/fastclick.js"></script>
-    <!-- NProgress -->
-    <script src="/HUB/public/js/nprogress.js"></script>
-    <!-- Chart.js -->
-    <script src="/HUB/public/js/Chart.min.js"></script>
-    <!-- jQuery Sparklines -->
-    <script src="/HUB/public/js/jquery.sparkline.min.js"></script>
-    <!-- morris.js -->
-    <script src="/HUB/public/js/raphael.min.js"></script>
-    <!-- gauge.js -->
-    <script src="/HUB/public/js/gauge.min.js"></script>
-    <!-- bootstrap-progressbar -->
-    <script src="/HUB/public/js/bootstrap-progressbar.min.js"></script>
-    <!-- Skycons -->
-    <script src="/HUB/public/js/skycons.js"></script>
-    <!-- Flot -->
-    <script src="/HUB/public/js/jquery.flot.js"></script>
-    <script src="/HUB/public/js/jquery.flot.pie.js"></script>
-    <script src="/HUB/public/js/jquery.flot.time.js"></script>
-    <script src="/HUB/public/js/jquery.flot.stack.js"></script>
-    <script src="/HUB/public/js/jquery.flot.resize.js"></script>
-    <!-- Flot plugins -->
-    <script src="/HUB/public/js/jquery.flot.orderBars.js"></script>
-    <script src="/HUB/public/js/jquery.flot.spline.min.js"></script>
-    <script src="/HUB/public/js/curvedLines.js"></script>
-    <!-- DateJS -->
-    <script src="/HUB/public/js/date.js"></script>
-    <!-- bootstrap-daterangepicker -->
-    <script src="/HUB/public/js/moment.min.js"></script>
-    <script src="/HUB/public/js/daterangepicker.js"></script>
-    <!-- Custom Theme Scripts -->
-    <!--<script src="build/js/custom.min.js"></script>-->
     <script src="/HUB/public/js/custom.js"></script>
-    <script src="/HUB/public/js/echarts.min.js"></script>
-    <script src="/HUB/public/js/world.js"></script>
-    <!-- Custom Theme Scripts -->
-    <script src="/HUB/public/js/morris.min.js"></script>
     {{--<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>--}}
+
     </body>
 </html>

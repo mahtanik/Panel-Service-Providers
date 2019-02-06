@@ -28,6 +28,46 @@
                 pointer-events: none;
             }
         </style>
+        <!-- jQuery -->
+        <script src="/HUB/public/js/jquery.min.js"></script>
+        <!-- Bootstrap -->
+        <script src="/HUB/public/js/bootstrap.min.js"></script>
+        <!-- FastClick -->
+        <script src="/HUB/public/js/fastclick.js"></script>
+        <!-- NProgress -->
+        <script src="/HUB/public/js/nprogress.js"></script>
+        <!-- Chart.js -->
+        <script src="/HUB/public/js/dist/Chart.min.js"></script>
+        <!-- jQuery Sparklines -->
+        <script src=/HUB/public/js/jquery.sparkline.min.js"></script>
+        <!-- morris.js -->
+        <script src="/HUB/public/js/raphael.min.js"></script>
+        <script src="/HUB/public/js/morris.min.js"></script>
+        <!-- gauge.js -->
+        <script src="/HUB/public/js/gauge.min.js"></script>
+        <!-- bootstrap-progressbar -->
+        <script src="/HUB/public/js/bootstrap-progressbar.min.js"></script>
+        <!-- Skycons -->
+        <script src="/HUB/public/js/skycons.js"></script>
+        <!-- Flot -->
+        <script src="/HUB/public/js/jquery.flot.js"></script>
+        <script src="/HUB/public/js/jquery.flot.pie.js"></script>
+        <script src="/HUB/public/js/jquery.flot.time.js"></script>
+        <script src="/HUB/public/js/jquery.flot.stack.js"></script>
+        <script src="/HUB/public/js/jquery.flot.resize.js"></script>
+        <!-- Flot plugins -->
+        <script src="/HUB/public/js/jquery.flot.orderBars.js"></script>
+        <script src="/HUB/public/js/jquery.flot.spline.min.js"></script>
+        <script src="/HUB/public/js/curvedLines.js"></script>
+        <!-- DateJS -->
+        <script src="/HUB/public/js/date.js"></script>
+        <!-- bootstrap-daterangepicker -->
+        <script src="/HUB/public/js/moment.min.js"></script>
+        <script src="/HUB/public/js/daterangepicker.js"></script>
+        <!-- Custom Theme Scripts -->
+        <script src="/HUB/public/js/echarts.min.js"></script>
+        <script src="/HUB/public/js/world.js"></script>
+        <script src="/HUB/public/js/Chart.js"></script>
     </head>
     <body class="nav-md" lang="fa">
     <div class="container body">
@@ -171,11 +211,24 @@
                                     <div class="clearfix"></div>
                                 </div>
                                 <div class="x_content">
-                                    <canvas id="mybarChart"></canvas>
+                                    <canvas id="mybar"></canvas>
                                 </div>
                             </div>
                         </div>
-                        {{--{{$servicesShare->transactions}}--}}
+                        <span id="topfour">
+                            <?php
+                                $tops = $topfour;
+                                $tops_json =  json_encode($tops);
+
+                                $all_users = $total_users;
+                                $all_users_json =  json_encode($total_users);
+
+                                $all_charges = $total_charges;
+                                $all_charges_json =  json_encode($total_charges);
+
+                                ?>
+                        </span>
+
                         <div class="col-md-6 col-sm-6 col-xs-2">
                             <div class="x_panel">
                                 <div class="x_title">
@@ -188,7 +241,7 @@
                                     <div class="clearfix"></div>
                                 </div>
                                 <div class="x_content">
-                                    <div id="echart_donut" style="height:350px;" ></div>
+                                    <div id="echart_donut" class="graphCanvas" style="height:350px;" ></div>
                                 </div>
                             </div>
                         </div>
@@ -201,48 +254,80 @@
     </div>
     <script>
 
+        var topfour = JSON.parse('<?= $tops_json; ?>');
+
+        var totalcharges = Object.values(JSON.parse('<?= $all_charges_json; ?>'));
+
+        var totalusers = Object.values(JSON.parse('<?= $all_users_json; ?>'));
+
+        console.log(topfour);
+        console.log(totalcharges);
+        console.log(totalusers);
+
+        if ($('#echart_donut').length ){
+
+            var theme = {
+                color: [
+                    '#26B99A', '#34495E', '#BDC3C7', '#3498DB',
+                    '#9B59B6', '#8abb6f', '#759c6a', '#bfd3b7'
+                ]};
+
+            var echartPie = echarts.init(document.getElementById('echart_donut'), theme);
+
+            echartPie.setOption({
+
+                legend: {
+                    	  x: 'center',
+                    	  y: 'bottom',
+                    	  data: topfour
+                    	}
+                ,
+                tooltip: {
+                    trigger: 'item',
+                    formatter: "{a} <br/>{b} : {c} ({d}%)"
+                },
+                calculable: true,
+                series: [{
+                    name: 'فعالسازی ها و شارژها',
+                    type: 'pie',
+                    radius: '55%',
+                    center: ['50%', '48%'],
+                    data: topfour
+                }]
+            });
+        }
+
+
+        if ($('#mybar').length ){
+
+            var ctx = document.getElementById("mybar");
+            var mybar = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ["فروردین", "اردیبهشت", "خرداد","تیر", "مرداد", "شهریور" ,"مهر", "آبان", "آذر", "دی" , "بهمن" , "اسفند"],
+                    datasets: [{
+                        label: 'شارژ',
+                        backgroundColor: "#26B99A",
+                        data: totalcharges
+                    }, {
+                        label: ' کاربران',
+                        backgroundColor: "#03586A",
+                        data: totalusers
+                    }]
+                },
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    }
+                }
+            });
+        }
     </script>
-    <!-- jQuery -->
-    <script src="/HUB/public/js/jquery.min.js"></script>
-    <!-- Bootstrap -->
-    <script src="/HUB/public/js/bootstrap.min.js"></script>
-    <!-- FastClick -->
-    <script src="/HUB/public/js/fastclick.js"></script>
-    <!-- NProgress -->
-    <script src="/HUB/public/js/nprogress.js"></script>
-    <!-- Chart.js -->
-    <script src="/HUB/public/Chart.js/dist/Chart.min.js"></script>
-    <script src="/HUB/public/Chart.js/dist/Chart.min.js"></script>
-    <!-- jQuery Sparklines -->
-    <script src=/HUB/public/js/jquery.sparkline.min.js"></script>
-    <!-- morris.js -->
-    <script src="/HUB/public/js/raphael.min.js"></script>
-    <script src="/HUB/public/js/morris.min.js"></script>
-    <!-- gauge.js -->
-    <script src="/HUB/public/js/gauge.min.js"></script>
-    <!-- bootstrap-progressbar -->
-    <script src="/HUB/public/js/bootstrap-progressbar.min.js"></script>
-    <!-- Skycons -->
-    <script src="/HUB/public/js/skycons.js"></script>
-    <!-- Flot -->
-    <script src="/HUB/public/js/jquery.flot.js"></script>
-    <script src="/HUB/public/js/jquery.flot.pie.js"></script>
-    <script src="/HUB/public/js/jquery.flot.time.js"></script>
-    <script src="/HUB/public/js/jquery.flot.stack.js"></script>
-    <script src="/HUB/public/js/jquery.flot.resize.js"></script>
-    <!-- Flot plugins -->
-    <script src="/HUB/public/js/jquery.flot.orderBars.js"></script>
-    <script src="/HUB/public/js/jquery.flot.spline.min.js"></script>
-    <script src="/HUB/public/js/curvedLines.js"></script>
-    <!-- DateJS -->
-    <script src="/HUB/public/js/date.js"></script>
-    <!-- bootstrap-daterangepicker -->
-    <script src="/HUB/public/js/moment.min.js"></script>
-    <script src="/HUB/public/js/daterangepicker.js"></script>
-    <!-- Custom Theme Scripts -->
-    <script src="/HUB/public/js/echarts.min.js"></script>
-    <script src="/HUB/public/js/world.js"></script>
-    <script src="/HUB/public/js/Chart.js"></script>
+
     <!-- Custom Theme Scripts -->
     <script src="/HUB/public/js/custom.js"></script>
     {{--<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>--}}

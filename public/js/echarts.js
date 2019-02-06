@@ -12,7 +12,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
 
-/******/ 	// The require function
+/******/ 	// The require functon
 /******/ 	function __webpack_require__(moduleId) {
 
 /******/ 		// Check if module is in cache
